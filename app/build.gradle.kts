@@ -10,6 +10,8 @@ repositories {
 
 dependencies{
     implementation("com.discord4j:discord4j-core:3.2.3")
+    implementation("com.discord4j:discord4j-common:3.2.3")
+
     implementation("com.github.Anuken.Arc:arc-core:v140.3")
 }
 

@@ -8,7 +8,7 @@ import discord4j.core.object.entity.*;
 import reactor.core.publisher.*;
 
 public class Commands{
-    private static ObjectMap<String, Cons<Message>> stringCommands = new ObjectMap<String, Cons<Message>>();
+    public static final ObjectMap<String, Cons<Message>> stringCommands = new ObjectMap<String, Cons<Message>>();
     private static final String prefix = "sm!";
     
     public static void listenerBegin(GatewayDiscordClient client){
