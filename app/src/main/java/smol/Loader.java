@@ -1,11 +1,12 @@
 package smol;
 
+import arc.util.*;
 import arc.struct.*;
 import smol.*;
 import smol.util.*;
 import discord4j.core.*;
 import discord4j.core.object.entity.*;
-import discord4j.core.object.prescence.*;
+import discord4j.core.object.presence.*;
 import discord4j.common.util.*;
 
 public class Loader{
