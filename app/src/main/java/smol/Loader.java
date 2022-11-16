@@ -2,6 +2,7 @@ package smol;
 
 import arc.util.*;
 import smol.*;
+import smol.util.*;
 import smol.commands.*;
 import discord4j.core.*;
 import discord4j.core.object.entity.*;
@@ -21,10 +22,10 @@ public class Loader{
         Commands.stringCommand("logout", msg -> {
             String[] args = msg.getContent().split(" ");
             
-            System.out.println(SmolBot.killKey.toString());
+            System.out.println(Stringer.wrapInt(SmolBot.killKey));
             
             SmolBot.superusers.each(ke -> {
-                if(args[1] == SmolBot.killKey.toString() && msg.getAuthorAsMember().block(40).getId().asLong() == ke) client.logout();
+                if(args[1] == Stringer.wrapInt(SmolBot.killKey) && msg.getAuthorAsMember().block(40).getId().asLong() == ke) client.logout();
             });
         });
         
