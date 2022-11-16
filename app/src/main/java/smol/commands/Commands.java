@@ -17,8 +17,9 @@ public class Commands{
             
             if(stringCommands.containsKey(mg.getContent())){
                 stringCommands.get(mg.getContent()).get(mg);
-                System.out.println("Command called.");
             }
+            
+            System.out.println(mg.getContent());
             
             return Mono.empty();
         });
