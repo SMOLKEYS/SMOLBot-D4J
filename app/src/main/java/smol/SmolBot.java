@@ -14,7 +14,10 @@ public class SmolBot{
         if(args[0] == null) throw new NullPointerException("No token provided.");
         client = DiscordClient.create(args[0]);
         
-        mono = client.withGateway(cl -> Loader.beginClient(cl));
+        mono = client.withGateway(cl -> {
+            Loader.beginClient(cl);
+            return Mono.empty();
+        });
         preparation();
     }
     
