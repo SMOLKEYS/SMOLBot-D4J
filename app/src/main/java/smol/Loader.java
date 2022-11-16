@@ -25,7 +25,7 @@ public class Loader{
             System.out.println(Stringer.wrapInt(SmolBot.killKey));
             
             SmolBot.superusers.each(ke -> {
-                if(args[1] == Stringer.wrapInt(SmolBot.killKey) && msg.getAuthorAsMember().subscribe().getId().asLong() == ke) client.logout();
+                if(args[1] == Stringer.wrapInt(SmolBot.killKey) && msg.getAuthorAsMember().block().getId().asLong() == ke) client.logout();
             });
         });
         
