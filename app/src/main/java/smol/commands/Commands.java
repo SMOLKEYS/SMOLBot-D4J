@@ -22,7 +22,7 @@ public class Commands{
             }
             
             return Mono.empty();
-        }).blockLast();
+        }).subscribe();
     }
     
     public static void stringCommand(String name, Cons<Message> message){
