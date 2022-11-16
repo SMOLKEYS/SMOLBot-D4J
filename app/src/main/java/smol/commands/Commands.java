@@ -13,7 +13,10 @@ public class Commands{
     
     public static void listenerBegin(GatewayDiscordClient client){
         client.on(MessageCreateEvent.class, msg -> {
-            if(stringCommands.containsKey(msg.getMessage().getContent())) stringCommands.get(msg.getMessage().getContent()).get(msg.getMessage());
+            if(stringCommands.containsKey(msg.getMessage().getContent())){
+                stringCommands.get(msg.getMessage().getContent()).get(msg.getMessage());
+                System.out.println("Command called.")
+            }
             
             return Mono.empty();
         });
@@ -21,5 +24,6 @@ public class Commands{
     
     public static void stringCommand(String name, Cons<Message> message){
         stringCommands.put(prefix + name, message);
+        System.out.println("Command registered: " + prefix + name);
     }
 }
