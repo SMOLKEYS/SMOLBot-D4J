@@ -13,8 +13,10 @@ public class Commands{
     
     public static void listenerBegin(GatewayDiscordClient client){
         client.on(MessageCreateEvent.class, msg -> {
-            if(stringCommands.containsKey(msg.getMessage().getContent())){
-                stringCommands.get(msg.getMessage().getContent()).get(msg.getMessage());
+            Message mg = msg.getMessage();
+            
+            if(stringCommands.containsKey(mg.getContent())){
+                stringCommands.get(mg.getContent()).get(mg);
                 System.out.println("Command called.")
             }
             
