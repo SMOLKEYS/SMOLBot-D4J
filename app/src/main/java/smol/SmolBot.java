@@ -1,8 +1,8 @@
 package smol;
 
+import smol.*;
 import discord4j.core.*;
 import reactor.core.publisher.*;
-import smol.*;
 
 /** The core class that fires up the bot. All other things are located in Loader. */
 public class SmolBot{
