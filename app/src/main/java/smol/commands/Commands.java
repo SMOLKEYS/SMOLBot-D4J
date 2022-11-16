@@ -21,7 +21,7 @@ public class Commands{
             }
             
             return Mono.empty();
-        });
+        }).blockLast();
     }
     
     public static void stringCommand(String name, Cons<Message> message){
