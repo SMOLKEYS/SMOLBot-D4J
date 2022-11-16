@@ -7,7 +7,7 @@ import discord4j.core.event.domain.message.*;
 import discord4j.core.object.entity.*;
 
 public class Commands{
-    private static ObjectMap<String, Cons<Message>> stringCommands = new Seq<>();
+    private static ObjectMap<String, Cons<Message>> stringCommands = new ObjectMap<String, Cons<Message>>();
     private static final String prefix = "sm!";
     
     public static void listenerBegin(GatewayDiscordClient client){
