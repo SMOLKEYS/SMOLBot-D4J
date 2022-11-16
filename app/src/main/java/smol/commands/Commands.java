@@ -4,11 +4,11 @@ import arc.func.*;
 import arc.struct.*;
 import discord4j.core.*;
 import discord4j.core.event.domain.message.*;
-import discord4j.core.object.entity.*:
+import discord4j.core.object.entity.*;
 
 public class Commands{
     private static ObjectMap<String, Cons<Message>> stringCommands = new Seq<>();
-    private static final prefix = "sm!";
+    private static final String prefix = "sm!";
     
     public static void listenerBegin(GatewayDiscordClient client){
         client.on(MessageCreateEvent.class, msg -> {
