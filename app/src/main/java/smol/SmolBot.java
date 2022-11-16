@@ -9,7 +9,7 @@ import reactor.core.publisher.*;
 /** The core class that fires up the bot. All other things are located in Loader. */
 public class SmolBot{
     public static DiscordClient client;
-    public static String killKey;
+    public static int killKey;
     public static Mono<Void> mono;
     public static long startedOn;
     public static Seq<Long> superusers = Seq.with(691650272166019164L);
@@ -28,7 +28,7 @@ public class SmolBot{
     
     public static void preparation(){
         startedOn = System.currentTimeMillis();
-        killKey = Mathf.random(85250, 9816390).toString();
+        killKey = Mathf.random(85250, 9816390);
         
         //starts the overall client.
         mono.block();

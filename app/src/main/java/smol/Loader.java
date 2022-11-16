@@ -19,12 +19,12 @@ public class Loader{
         });
         
         Commands.stringCommand("logout", msg -> {
-            String[] args = msg.getContent().split(' ');
+            String[] args = msg.getContent().split(" ");
             
-            System.out.println(SmolBot.killKey);
+            System.out.println(SmolBot.killKey.toString());
             
             SmolBot.superusers.each(ke -> {
-                if(args[1] == SmolBot.killKey && ((Member)msg.getAuthorAsMember()).getId().asLong() == ke) client.logout();
+                if(args[1] == SmolBot.killKey.toString() && msg.getAuthorAsMember().block(40).getId().asLong() == ke) client.logout();
             });
         });
         
