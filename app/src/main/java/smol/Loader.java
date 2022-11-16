@@ -41,6 +41,6 @@ public class Loader{
         
         Commands.listenerBegin(client);
         
-        Timer.schedule(() -> client.logout(), 14400);
+        Time.run(60f * 14400f, () -> client.logout());
     }
 }
