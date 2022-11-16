@@ -14,12 +14,11 @@ public class Commands{
     public static void listenerBegin(GatewayDiscordClient client){
         client.on(MessageCreateEvent.class, msg -> {
             Message mg = msg.getMessage();
+            System.out.println(mg.getContent());
             
             if(stringCommands.containsKey(mg.getContent())){
                 stringCommands.get(mg.getContent()).get(mg);
             }
-            
-            System.out.println(mg.getContent());
             
             return Mono.empty();
         });
