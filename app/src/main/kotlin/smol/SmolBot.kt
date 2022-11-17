@@ -4,6 +4,7 @@ import smol.*
 import smol.console.*
 import java.util.*
 import kotlin.concurrent.*
+import kotlinx.coroutines.*
 import arc.math.*
 import dev.kord.core.*
 
@@ -27,7 +28,7 @@ suspend fun main(vararg args: String){
     }
     
     Timer(true).scheduleAtFixedRate(0L, 1000 * 25L){
-        Vars.client.setPresence{
+        Vars.client.editPresence{
             watching(Vars.bruh.random())
         }
     }

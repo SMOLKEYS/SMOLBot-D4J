@@ -11,7 +11,7 @@ repositories {
 }
 
 dependencies{
-    implementation("dev.kord:kord-core:0.8.0-M10")
+    implementation("dev.kord:kord-core:0.8.0-M17")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
     //implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
     
