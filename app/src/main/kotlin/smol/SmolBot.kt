@@ -2,6 +2,8 @@ package smol
 
 import smol.*
 import smol.console.*
+import dev.kord.core.*
+
 
 suspend fun main(vararg args: String){
     val token = args.getOrNull(0)
