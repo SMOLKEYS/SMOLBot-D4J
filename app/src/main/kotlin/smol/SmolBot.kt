@@ -7,6 +7,7 @@ import kotlin.concurrent.*
 import kotlinx.coroutines.*
 import arc.math.*
 import dev.kord.core.*
+import dev.kord.core.entity.channel.*
 
 suspend fun main(vararg args: String){
     val token = args.getOrNull(0)
@@ -39,6 +40,6 @@ suspend fun main(vararg args: String){
     
     Vars.client.login{
         presence{ watching(Vars.bruh.random()) }
-        Vars.client.getChannel(Vars.statusReportChannel).createMessage("Bot login complete! (${Vars.ubid})")
+        (Vars.client.getChannel(Vars.statusReportChannel) as MessageChannel).createMessage("Bot login complete! (${Vars.ubid})")
     }
 }
