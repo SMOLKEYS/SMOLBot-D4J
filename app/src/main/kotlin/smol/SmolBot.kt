@@ -10,6 +10,7 @@ import arc.math.*
 import dev.kord.core.*
 import dev.kord.core.entity.channel.*
 import dev.kord.core.behavior.channel.*
+import dev.kord.rest.builder.message.create.*
 import dev.kord.common.*
 
 suspend fun main(vararg args: String){
@@ -25,7 +26,10 @@ suspend fun main(vararg args: String){
     }
     
     Vars.ubid = Mathf.random(197360, 9801630)
-    Vars.statusReportChannel = Vars.client.getMessageChannel(948818452678852628UL.toSnowflake())
+    //mood
+    Vars.client.launch{
+        Vars.statusReportChannel = Vars.client.getMessageChannel(948818452678852628UL.toSnowflake())
+    }
     
     Timer(true).schedule(1000 * 60 * 60 * 4L){
         Vars.client.launch{
