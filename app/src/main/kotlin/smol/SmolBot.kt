@@ -20,6 +20,8 @@ suspend fun main(vararg args: String){
         
     }
     
+    Vars.ubid = Mathf.random(197360, 9801630)
+    
     Timer(true).schedule(1000 * 60 * 60 * 5L){
         Vars.client.launch{
             Printings.info("This instance is shutting down.")
@@ -37,5 +39,6 @@ suspend fun main(vararg args: String){
     
     Vars.client.login{
         presence{ watching(Vars.bruh.random()) }
+        Vars.client.getChannel(Vars.statusReportChannel).createMessage("Bot login complete! (${Vars.ubid})")
     }
 }
