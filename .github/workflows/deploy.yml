@@ -6,8 +6,8 @@ on:
       amogi:
         description: 'idk too'
         required: false
-  #schedule:
-    #- cron: '11 1,5,9,13,17,21 * * *'
+  schedule:
+    - cron: '11 1,5,9,13,17,21 * * *'
 
 jobs:
   deployment:
