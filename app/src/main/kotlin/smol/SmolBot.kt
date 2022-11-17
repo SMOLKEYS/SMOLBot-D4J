@@ -2,8 +2,10 @@ package smol
 
 import smol.*
 import smol.console.*
+import java.util.*
+import kotlin.concurrent.*
+import arc.math.*
 import dev.kord.core.*
-
 
 suspend fun main(vararg args: String){
     val token = args.getOrNull(0)
@@ -15,6 +17,19 @@ suspend fun main(vararg args: String){
     
     Vars.client = Kord(token){
         
+    }
+    
+    Timer(true).schedule(1000 * 60 * 60 * 5L){
+        Vars.client.launch{
+            Printings.info("This instance is shutting down.")
+            Vars.client.shutdown()
+        }
+    }
+    
+    Timer(true).scheduleAtFixedRate(0L, 1000 * 25L){
+        Vars.client.setPresence{
+            watching(Vars.bruh.random())
+        }
     }
     
     Vars.client.login{
