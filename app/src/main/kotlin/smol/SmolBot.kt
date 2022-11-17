@@ -28,8 +28,10 @@ suspend fun main(vararg args: String){
     }
     
     Timer(true).scheduleAtFixedRate(0L, 1000 * 25L){
-        Vars.client.editPresence{
-            watching(Vars.bruh.random())
+        Vars.client.launch{
+            Vars.client.editPresence{
+                watching(Vars.bruh.random())
+            }
         }
     }
     
