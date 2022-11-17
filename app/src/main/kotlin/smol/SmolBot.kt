@@ -67,7 +67,6 @@ suspend fun main(vararg args: String){
                     Epoch (ms): ${Vars.epoch}
                     ```
                 """.trimIndent()
-                footer = "Ahehe..."
                 
                 color = Color(0, 255, 0)
             }
