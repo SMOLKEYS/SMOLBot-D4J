@@ -27,9 +27,7 @@ suspend fun main(vararg args: String){
     
     Vars.ubid = Mathf.random(197360, 9801630)
     //mood
-    Vars.client.launch{
-        Vars.statusReportChannel = Vars.client.getMessageChannel(948818452678852628UL.toSnowflake())
-    }
+    Vars.statusReportChannel = Vars.client.getMessageChannel(948818452678852628UL.toSnowflake())
     
     Timer(true).schedule(1000 * 60 * 60 * 4L){
         Vars.client.launch{
