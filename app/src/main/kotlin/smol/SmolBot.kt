@@ -3,7 +3,6 @@ package smol
 import smol.*
 import smol.util.*
 import smol.console.*
-import smol.instances.*
 import java.util.*
 import kotlin.concurrent.*
 import kotlinx.coroutines.*
@@ -52,12 +51,11 @@ suspend fun main(vararg args: String){
         }
         
         while(true){
-            delay(1000 * 5L){
-                InstanceHandler.compare{
-                    Vars.statusReportChannel.createMessage("Instance detected with older epoch time. Ending this one...")
-                    
-                    Vars.client.shutdown()
-                }
+            delay(1000 * 5L)
+            if(Vars.epochStatusChannel.getLastMessage().content.toLong() > Vars.epoch){
+                Vars.statusReportChannel("Bot instance with older epoch detected. Terminating newer one...")
+                
+                Vars.client.shutdown()
             }
         }
     }
@@ -85,6 +83,6 @@ suspend fun main(vararg args: String){
             }
         }
         
-        Vars.epochStatusChannel.createMessage(Vars.epoch)
+        Vars.epochStatusChannel.createMessage(Vars.epoch.toString())
     }
 }
