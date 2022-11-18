@@ -3,6 +3,7 @@ package smol
 import smol.*
 import smol.util.*
 import smol.console.*
+import smol.instances.*
 import java.util.*
 import kotlin.concurrent.*
 import kotlinx.coroutines.*
@@ -27,9 +28,10 @@ suspend fun main(vararg args: String){
     
     Vars.ubid = Mathf.random(197360, 9801630)
     //mood
-    Vars.statusReportChannel = Vars.client.getMessageChannel(948818452678852628UL.toSnowflake())
+    Vars.statusReportChannel = Vars.client.getTextChannel(948818452678852628UL.toSnowflake())
+    Vars.epochStatusChannel = Vars.client.getTextChannel(1043136089684201483UL.toSnowflake())
     
-    Timer(true).schedule(1000 * 60 * 60 * 4L){
+    Timer(true).schedule(1000 * 60 * 60 * 5L){
         Vars.client.launch{
             Printings.info("This instance is shutting down.")
             
@@ -41,13 +43,26 @@ suspend fun main(vararg args: String){
         }
     }
     
-    Timer(true).scheduleAtFixedRate(0L, 1000 * 25L){
-        Vars.client.launch{
+    Vars.client.launch{
+        while(true){
+            delay(1000 * 25L)
             Vars.client.editPresence{
                 watching(Vars.bruh.random())
             }
         }
+        
+        while(true){
+            delay(1000 * 5L){
+                InstanceHandler.compare{
+                    Vars.statusReportChannel.createMessage("Instance detected with older epoch time. Ending this one...")
+                    
+                    Vars.client.shutdown()
+                }
+            }
+        }
     }
+    
+    
     
     Vars.client.login{
         presence{ watching(Vars.bruh.random()) }
@@ -69,5 +84,7 @@ suspend fun main(vararg args: String){
                 color = Color(0, 255, 0)
             }
         }
+        
+        Vars.epochStatusChannel.createMessage(Vars.epoch)
     }
 }
