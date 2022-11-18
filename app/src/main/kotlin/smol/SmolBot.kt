@@ -52,8 +52,9 @@ suspend fun main(vararg args: String){
         
         while(true){
             delay(1000 * 5L)
-            if(Vars.epochStatusChannel.getLastMessage().content.toLong() > Vars.epoch){
-                Vars.statusReportChannel("Bot instance with older epoch detected. Terminating newer one...")
+            
+            if(Vars.epochStatusChannel.getLastMessage()!!.content.toLong() > Vars.epoch){
+                Vars.statusReportChannel.createMessage("Bot instance with older epoch detected. Terminating newer one...")
                 
                 Vars.client.shutdown()
             }
