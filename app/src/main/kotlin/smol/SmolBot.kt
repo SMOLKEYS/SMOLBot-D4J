@@ -30,7 +30,7 @@ suspend fun main(vararg args: String){
     Vars.statusReportChannel = Vars.client.getTextChannel(948818452678852628UL.toSnowflake())
     Vars.epochStatusChannel = Vars.client.getTextChannel(1043136089684201483UL.toSnowflake())
     
-    Timer(true).schedule(1000 * 60 * 60 * 5L){
+    Timer(true).schedule(1000 * 60 * 60 * 6L){
         Vars.client.launch{
             Printings.info("This instance is shutting down.")
             
@@ -53,9 +53,8 @@ suspend fun main(vararg args: String){
     
     Vars.client.launch{
         while(true){
-            delay(1000 * 5L)
+            delay(1000 * 4L)
             
-            println("am i workering?")
             if(Vars.epochStatusChannel.fetchChannel().toTextChannel().getLastMessage()!!.content.toLong() > Vars.epoch){
                 Vars.statusReportChannel.createMessage("Bot instance with older epoch detected. Terminating newer one...")
                 
