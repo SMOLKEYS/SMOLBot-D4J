@@ -49,7 +49,9 @@ suspend fun main(vararg args: String){
                 watching(Vars.bruh.random())
             }
         }
-        
+    }
+    
+    Vars.client.launch{
         while(true){
             delay(1000 * 5L)
             
