@@ -5,7 +5,7 @@ import dev.kord.core.entity.*
 import dev.kord.common.entity.*
 import dev.kord.core.entity.channel.*
 import dev.kord.core.behavior.reply
-
+import kotlinx.coroutines.*
 
 suspend fun Kord.getTextChannel(id: Snowflake) = this.getChannel(id) as TextChannel
 
@@ -31,3 +31,8 @@ fun String.enforce(sub: Int = 0) = this.take(2000 - sub)
 fun String.blockWrap(): String{
     return "```\n${this.enforce(8)}\n```"
 }
+
+
+inline fun launch(crossinline l: suspend CoroutineScope.() -> Unit) = Vars.client.launch{ l() };
+
+inline fun <R> async(crossinline l: suspend CoroutineScope.() -> R) = Vars.client.async{ l() };
