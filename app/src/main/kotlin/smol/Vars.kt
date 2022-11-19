@@ -11,5 +11,6 @@ object Vars{
     lateinit var epochStatusChannel: TextChannel
     var ubid = 0
     var epoch = 0L
+    val superuser = 691650272166019164UL.toSnowflake()
     val bruh = arrayOf("kordin' time", "balls", "kord", "smolkeys", "nothing")
 }

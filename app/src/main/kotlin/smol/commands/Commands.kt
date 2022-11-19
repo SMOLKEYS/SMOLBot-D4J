@@ -1,5 +1,6 @@
 package smol.commands
 
+import arc.util.*
 import smol.*
 import smol.util.*
 import smol.commands.*
@@ -58,11 +59,13 @@ object Commands{
         command("newline"){
             it.first.reply(buildString{
                 if(it.second.size == 0) append("Nothing to newline! (Expected ${Args.ANY} arguments, got 0)") else it.second.forEach{ appendNewline(it) }
-            })
+            }.take(2000))
         }
         
         command("exec"){
-            
+            it.first.reply(buildString{
+                if(it.first.author!!.id != Vars.superuser) append("You cannot run this command.") else if(it.second.size == 0 ) append("No arguments specified! (Expected ${Args.ANY} arguments, got 0)") else append(OS.exec(*it.second))
+            })
         }
     }
     
