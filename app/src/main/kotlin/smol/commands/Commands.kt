@@ -114,6 +114,7 @@ object Commands{
                             content = "By ${ref.author!!.username} in ${ref.channel.mention}:\n${ref.content.enforce(170)}\nUploaded by ${it.first.author!!.username}".enforce()
                         }
                     }
+                    
                     "unsafe" -> {
                         it.first.reply("Uploaded message to centcom *nsfw* archive.")
                         

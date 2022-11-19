@@ -23,7 +23,7 @@ fun ULong.toSnowflake() = Snowflake(this)
 
 suspend fun Message.reply(msg: String): Message = this.reply{ content = msg }
 
-suspend fun Message.refer(): Message? = this.channel.getMessageOrNull(this.data.messageReference.id!!.value)
+suspend fun Message.refer(): Message? = this.channel.getMessageOrNull(this.data.messageReference.value!!.id.value!!)
 
 
 
