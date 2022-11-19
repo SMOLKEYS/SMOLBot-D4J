@@ -125,7 +125,7 @@ object Commands{
                         }
                     }
                     
-                    else -> it.first.reply("No/wrong arguments provided! (sfw/nsfw)")
+                    else -> it.first.reply("No/wrong arguments provided! (safe/unsafe)")
                 }
             }else it.first.reply("No message target found! (Use this command as a reply!)")
         }
