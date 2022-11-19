@@ -19,7 +19,7 @@ object Commands{
     }
     
     fun process(msg: Message){
-        println("process start")
+        println("process start on ${msg.content}")
         var base = msg.content.trim().split(' ').toTypedArray()
         println("typed array split begin on ${base.toList()}")
         if(base.size > 1){
