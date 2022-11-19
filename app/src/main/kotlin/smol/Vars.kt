@@ -22,7 +22,7 @@ object Vars{
     
     val scriptContext = SimpleScriptContext()
     
-	val defaultImports by lazy {
+	val defaultImports by lazy{
 		ClassLoader::class.java.getDeclaredField("classes")
 			.let {
 				it.isAccessible = true

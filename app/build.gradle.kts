@@ -28,6 +28,13 @@ dependencies{
 }
 
 
+tasks.compileKotlin{
+	kotlinOptions.apply{
+		sourceCompatibility = "11"
+		jvmTarget = "11"
+	}
+}
+
 tasks.jar {
 	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 	
