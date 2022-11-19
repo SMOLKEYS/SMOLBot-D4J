@@ -14,6 +14,7 @@ import dev.kord.core.entity.channel.*
 import dev.kord.core.behavior.channel.*
 import dev.kord.rest.builder.message.create.*
 import dev.kord.common.*
+import dev.kord.gateway.*
 
 suspend fun main(vararg args: String){
     val token = args.getOrNull(0)
@@ -81,6 +82,9 @@ suspend fun main(vararg args: String){
     
     Vars.client.login{
         presence{ watching(Vars.bruh.random()) }
+        
+        @OptIn
+        intents += Intent.MessageContent
         
         Vars.epoch = System.currentTimeMillis()
         
