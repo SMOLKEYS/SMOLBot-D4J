@@ -8,6 +8,7 @@ import arc.struct.*
 import dev.kord.core.*
 import dev.kord.core.entity.*
 import dev.kord.core.behavior.*
+import dev.kord.core.behavior.channel.*
 import javax.script.*
 import kotlinx.coroutines.*
 
@@ -107,7 +108,7 @@ object Commands{
                     "safe" -> {
                         it.first.reply("Uploaded message to centcom sfw archive.")
                         
-                        val ref = it.first.refer()
+                        val ref = it.first.refer()!!
                         
                         Vars.sfwArchive.createMessage{
                             content = "By ${ref.author!!.username} in ${ref.channel.mention}:\n${ref.content.enforce(170)}\nUploaded by ${it.first.author!!.username}".enforce()
@@ -116,7 +117,7 @@ object Commands{
                     "unsafe" -> {
                         it.first.reply("Uploaded message to centcom *nsfw* archive.")
                         
-                        val ref = it.first.refer()
+                        val ref = it.first.refer()!!
                         
                         Vars.nsfwArchive.createMessage{
                             content = "By ${ref.author!!.username} in ${ref.channel.mention}:\n${ref.content.enforce(170)}\nUploaded by ${it.first.author!!.username}".enforce()
