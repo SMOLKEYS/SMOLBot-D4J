@@ -23,7 +23,7 @@ object Commands{
     
     suspend fun process(msg: Message){
         //println("process start on ${msg.content}")
-        var base = msg.content.trim().split(' ').toTypedArray()
+        var base = msg.content.trim().split("\\s".toRegex()).toTypedArray()
         //println("typed array split begin on ${base.toList()}")
         if(base.size > 1){
             //println("base size > 1")
