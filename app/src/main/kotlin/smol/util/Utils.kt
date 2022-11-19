@@ -17,5 +17,5 @@ inline fun <reified T> Array<T>.copyWithoutFirstElement(): Array<T>{
 }
 
 fun StringBuilder.appendNewline(obj: Any){
-    this.append("$obj")
+    this.append("$obj\n")
 }
