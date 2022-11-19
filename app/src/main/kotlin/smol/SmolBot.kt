@@ -35,6 +35,7 @@ suspend fun main(vararg args: String){
     
     Vars.client.launch{
         Commands.load()
+        Commands.afterLoad()
     }
     
     Timer(true).schedule(1000 * 60 * 60 * 6L){
