@@ -65,7 +65,7 @@ object Commands{
         command("exec"){
             it.first.reply(buildString{
                 if(it.first.author!!.id != Vars.superuser) append("You cannot run this command.") else if(it.second.size == 0 ) append("No arguments specified! (Expected ${Args.ANY} arguments, got 0)") else append(OS.exec(*it.second))
-            })
+            }.take(2000))
         }
     }
     
