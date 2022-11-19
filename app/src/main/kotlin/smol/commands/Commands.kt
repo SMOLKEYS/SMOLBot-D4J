@@ -14,16 +14,22 @@ object Commands{
     
     fun command(name: String, proc: (Pair<Message, Array<String>>) -> Unit){
         registry.put(pref + name, proc)
+        println("command registered: $pref$name")
+        
     }
     
     fun process(msg: Message){
+        println("process start")
         if(registry.containsKey(msg.content.trim().split(' ')[0])){
+            println("typed array split begin")
             var base = msg.content.trim().split(' ').toTypedArray()
             if(base.size > 1){
+                println("base size > 1")
                 var args = base.copyWithoutFirstElement()
             
                 if(registry.containsKey(base[0])) registry[base[0]](Pair(msg, args))
             }else{
+                println("base size = 1")
                 if(registry.containsKey(base[0])) registry[base[0]](Pair(msg, arrayOf<String>()))
             }
         }
