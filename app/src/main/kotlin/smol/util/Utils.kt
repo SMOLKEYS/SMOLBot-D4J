@@ -11,7 +11,7 @@ suspend fun Kord.getTextChannel(id: Snowflake) = this.getChannel(id) as TextChan
 fun Channel.toTextChannel() = this as TextChannel
 fun ULong.toSnowflake() = Snowflake(this)
 
-fun Message.reply(msg: String) = this.reply{ content = "$msg" }
+suspend fun Message.reply(msg: String) = this.reply{ content = msg }
 
 
 inline fun <reified T> Array<T>.copyWithoutFirstElement(): Array<T>{
