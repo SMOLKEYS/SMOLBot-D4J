@@ -4,6 +4,7 @@ import dev.kord.core.*
 import dev.kord.core.entity.*
 import dev.kord.common.entity.*
 import dev.kord.core.entity.channel.*
+import dev.kord.core.behavior.MessageBehavior.reply
 
 suspend fun Kord.getTextChannel(id: Snowflake) = this.getChannel(id) as TextChannel
 
