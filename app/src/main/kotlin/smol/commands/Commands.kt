@@ -6,6 +6,7 @@ import arc.struct.*
 import dev.kord.core.*
 import dev.kord.core.entity.*
 import dev.kord.core.behavior.*
+import kotlinx.coroutines.*
 
 object Commands{
     private val pref = "sm!"
