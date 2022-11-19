@@ -9,9 +9,16 @@ import dev.kord.core.behavior.reply
 import kotlinx.coroutines.*
 
 suspend fun Kord.getTextChannel(id: Snowflake) = this.getChannel(id) as TextChannel
-
+suspend fun Kord.getNewsChannel(id: Snowflake) = this as NewsChannel
+suspend fun Kord.getMessageChannel(id: Snowflake) = this as MessageChannel
+suspend fun Kord.getVoiceChannel(id: Snowflake) = this as VoiceChannel
 
 fun Channel.toTextChannel() = this as TextChannel
+fun Channel.toNewsChannel() = this as NewsChannel
+fun Channel.toMessageChannel() = this as MessageChannel
+fun Channel.toVoiceChannel() = this as VoiceChannel
+
+
 fun ULong.toSnowflake() = Snowflake(this)
 
 suspend fun Message.reply(msg: String): Message = this.reply{ content = msg }
