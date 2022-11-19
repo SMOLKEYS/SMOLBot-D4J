@@ -73,7 +73,7 @@ object Commands{
             val script = it.first.content.substring(8)
             
             Vars.scriptEngine.put("message", it.first)
-            Vars.scriptContext.setAttribute("message", msg, ScriptContext.ENGINE_SCOPE)
+            Vars.scriptContext.setAttribute("message", it.first, ScriptContext.ENGINE_SCOPE)
             
             val res = try{
                 if(it.first.author!!.id != Vars.superuser) throw IllegalArgumentException("You cannot run this command.")
@@ -90,7 +90,7 @@ object Commands{
                 }
             }
             
-            it.first.reply(res.blockWrap())
+            it.first.reply("$res".blockWrap())
         }
     }
     
