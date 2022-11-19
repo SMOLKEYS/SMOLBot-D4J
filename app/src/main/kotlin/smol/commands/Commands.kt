@@ -27,7 +27,7 @@ object Commands{
         }
     }
     
-    inline fun load(){
+    suspend fun load(){
         command("ping"){
         
             it.first.reply{
