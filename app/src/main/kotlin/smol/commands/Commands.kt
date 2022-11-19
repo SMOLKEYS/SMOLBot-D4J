@@ -101,7 +101,7 @@ object Commands{
             })
         }
         
-        commands("archive"){
+        command("archive"){
             if(it.first.refer() != null){
                 when(it.second[0]){
                     "safe" -> {
