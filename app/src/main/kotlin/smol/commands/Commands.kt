@@ -11,15 +11,15 @@ import kotlinx.coroutines.*
 
 object Commands{
     private val pref = "sm!"
-    val registry = ObjectMap<String, (Pair<Message, Array<String>>) -> Unit>()
+    val registry = ObjectMap<String, suspend (Pair<Message, Array<String>>) -> Unit>()
     
-    fun command(name: String, proc: (Pair<Message, Array<String>>) -> Unit){
+    fun command(name: String, proc: suspend (Pair<Message, Array<String>>) -> Unit){
         registry.put(pref + name, proc)
         println("command registered: $pref$name")
         
     }
     
-    fun process(msg: Message){
+    suspend fun process(msg: Message){
         //println("process start on ${msg.content}")
         var base = msg.content.trim().split(' ').toTypedArray()
         //println("typed array split begin on ${base.toList()}")
@@ -45,28 +45,20 @@ object Commands{
     
     fun load(){
         command("ping"){
-            Vars.client.launch{
-                it.first.reply{
-                    content = buildString{
-                        appendNewline("Pong!")
-                        if(it.second.size > 0){
-                            append("Some arguments were detected! ( ")
-                            it.second.forEach{ append("$it ") }
-                            append(")")
-                        }
-                    }
+            it.first.reply(buildString{
+                appendNewline("Pong!")
+                if(it.second.size > 0){
+                    append("Some arguments were detected! ( ")
+                    it.second.forEach{ append("$it ") }
+                    append(")")
                 }
-            }
+            })
         }
         
         command("newline"){
-            Vars.client.launch{
-                it.first.reply{
-                    content = buildString{
-                        if(it.second.size == 0) append("Nothing to newline! (Expected ${Args.ANY} arguments, got 0)") else it.second.forEach{ appendNewline(it) }
-                    }
-                }
-            }
+            it.first.reply(buildString{
+                if(it.second.size == 0) append("Nothing to newline! (Expected ${Args.ANY} arguments, got 0)") else it.second.forEach{ appendNewline(it) }
+            })
         }
     }
     
