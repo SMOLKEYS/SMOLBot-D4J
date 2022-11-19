@@ -77,13 +77,15 @@ object Commands{
             
             val res = try{
                 if(it.first.author!!.id != Vars.superuser) throw Throwable("You cannot run this command.")
-                Vars.scriptEngine.eval(script).let{
+                
+                Vars.scriptEngine.eval("${Vars.defaultImports}\n$script", Vars.scriptContext).let{
                     when(it){
                         is Deferred<*> -> it.await()
                         is Job -> it.join()
                         else -> it
                     }
                 }
+                
             }catch(e: Throwable){
                 (e.cause ?: e).let{
                     it.toString()

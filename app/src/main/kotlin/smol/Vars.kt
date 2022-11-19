@@ -1,6 +1,7 @@
 package smol
 
 import smol.util.*
+import java.util.Vector
 import dev.kord.core.*
 import dev.kord.common.entity.*
 import dev.kord.core.entity.channel.*
@@ -20,4 +21,17 @@ object Vars{
     }
     
     val scriptContext = SimpleScriptContext()
+    
+	val defaultImports by lazy {
+		ClassLoader::class.java.getDeclaredField("classes")
+			.let {
+				it.isAccessible = true
+				it.get(Vars::class.java.classLoader) as Vector<Class<*>>
+			}
+			.filter { "internal" !in it.name && "$" !in it.name }
+			.map { it.name.substringBeforeLast('.') + ".*" }
+			.distinct()
+			.let { it + "ktsinterface.*" }
+			.joinToString(";") { "import $it" }
+	}
 }
