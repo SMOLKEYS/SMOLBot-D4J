@@ -95,6 +95,14 @@ object Commands{
             it.first.reply("$res".blockWrap())
         }
         
+        command("logout"){
+            it.first.reply(buildString{
+                if(it.first.author!!.id != Vars.superuser) append("You cannot use this command.")
+                
+                if(it.second.size == 0) append("Expected at least 1 arguement, got none".blockWrap()) else if(it.second[0].toIntOrNull() == null) append("Invalid number.") else if(it.second[0].toInt() != Vars.ubid) append("Wrong number.") else{ append("Exiting..."); Vars.client.shutdown() }
+            })
+        }
+        
         command("help"){
             
         }
