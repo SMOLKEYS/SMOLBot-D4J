@@ -32,7 +32,10 @@ suspend fun main(vararg args: String){
     Vars.statusReportChannel = Vars.client.getTextChannel(948818452678852628UL.toSnowflake())
     Vars.epochStatusChannel = Vars.client.getTextChannel(1043136089684201483UL.toSnowflake())
     
-    Commands.load()
+    
+    Vars.client.launch{
+        Commands.load()
+    }
     
     Timer(true).schedule(1000 * 60 * 60 * 6L){
         Vars.client.launch{
