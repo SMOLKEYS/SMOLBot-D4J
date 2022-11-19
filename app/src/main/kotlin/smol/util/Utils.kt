@@ -4,6 +4,7 @@ import smol.*
 import dev.kord.core.*
 import dev.kord.core.entity.*
 import dev.kord.common.entity.*
+import dev.kord.common.entity.optional.*
 import dev.kord.core.entity.channel.*
 import dev.kord.core.behavior.reply
 import kotlinx.coroutines.*
@@ -23,7 +24,7 @@ fun ULong.toSnowflake() = Snowflake(this)
 
 suspend fun Message.reply(msg: String): Message = this.reply{ content = msg }
 
-suspend fun Message.refer(): Message? = this.channel.getMessageOrNull(this.data.messageReference.value!!.id.value!!)
+suspend fun Message.refer(): Message? = this.referencedMessage
 
 
 
