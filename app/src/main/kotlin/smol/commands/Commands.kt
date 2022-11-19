@@ -22,13 +22,13 @@ object Commands{
         println("process start")
         var base = msg.content.trim().split(' ').toTypedArray()
         println("typed array split begin")
-        if(base.size > 1){
-            println("base size > 1")
+        if(base.size == 1){
+            println("base size == 1")
             var args = base.copyWithoutFirstElement()
             
             if(registry.containsKey(base[0])) registry[base[0]](Pair(msg, args))
         }else{
-            println("base size = 1")
+            println("base size > 1")
             if(registry.containsKey(base[0])) registry[base[0]](Pair(msg, arrayOf<String>()))
         }
     }
