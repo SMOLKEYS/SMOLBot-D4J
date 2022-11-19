@@ -8,6 +8,7 @@ import arc.struct.*
 import dev.kord.core.*
 import dev.kord.core.entity.*
 import dev.kord.core.behavior.*
+import javax.script.*
 import kotlinx.coroutines.*
 
 object Commands{
@@ -66,6 +67,30 @@ object Commands{
             it.first.reply(buildString{
                 if(it.first.author!!.id != Vars.superuser) append("You cannot run this command.") else if(it.second.size == 0 ) append("No arguments specified! (Expected ${Args.ANY} arguments, got 0)") else append(OS.exec(*it.second))
             }.blockWrap())
+        }
+        
+        command("eval"){
+            val script = it.first.content.substring(8)
+            
+            Vars.scriptEngine.put("message", it.first)
+            Vars.scriptContext.setAttribute("message", msg, ScriptContext.ENGINE_SCOPE)
+            
+            val res = try{
+                if(it.first.author!!.id != Vars.superuser) throw IllegalArgumentException("You cannot run this command.")
+                Vars.scriptEngine.eval(script).let{
+                    when(it){
+                        is Deferred<*> -> it.await()
+                        is Job -> it.join()
+                        else -> it
+                    }
+                }
+            }catch(e: Throwable){
+                (e.cause ?: e).let{
+                    it.toString()
+                }
+            }
+            
+            it.first.reply(res.blockWrap())
         }
     }
     
