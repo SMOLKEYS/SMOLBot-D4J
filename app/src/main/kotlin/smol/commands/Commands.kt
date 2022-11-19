@@ -38,6 +38,8 @@ object Commands{
                 registry[base[0]](Pair(msg, arrayOf<String>()))
             }
         }
+        
+        println("registry: ${base[0]}: ${registry.containsKey(base[0])}")
     }
     
     fun load(){
