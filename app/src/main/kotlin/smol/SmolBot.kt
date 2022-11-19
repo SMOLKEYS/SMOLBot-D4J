@@ -83,7 +83,7 @@ suspend fun main(vararg args: String){
     Vars.client.login{
         presence{ watching(Vars.bruh.random()) }
         
-        @OptIn
+        @OptIn(PrivilegedIntent::class)
         intents += Intent.MessageContent
         
         Vars.epoch = System.currentTimeMillis()
