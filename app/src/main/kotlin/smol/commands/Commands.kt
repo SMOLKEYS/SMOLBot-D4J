@@ -53,7 +53,7 @@ object Commands{
     }
     
     fun afterLoad(){
-        registry.each{ t: String, k: ((Pair<Message, Array<String>>) -> Unit) ->
+        registry.each{ t, k ->
             println("command: $t")
         }
     }
