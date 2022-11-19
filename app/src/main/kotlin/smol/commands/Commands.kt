@@ -26,10 +26,14 @@ object Commands{
             println("base size == 1")
             var args = base.copyWithoutFirstElement()
             
-            if(registry.containsKey(base[0])) registry[base[0]](Pair(msg, args))
+            if(registry.containsKey(base[0])){
+                registry[base[0]](Pair(msg, args))
+            }
         }else{
             println("base size > 1")
-            if(registry.containsKey(base[0])) registry[base[0]](Pair(msg, arrayOf<String>()))
+            if(registry.containsKey(base[0])){
+                registry[base[0]](Pair(msg, arrayOf<String>()))
+            }
         }
     }
     
