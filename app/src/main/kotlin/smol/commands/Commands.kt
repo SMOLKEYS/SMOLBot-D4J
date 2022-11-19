@@ -53,19 +53,19 @@ object Commands{
                     it.second.forEach{ append("$it ") }
                     append(")")
                 }
-            }.take(2000))
+            }.enforce())
         }
         
         command("newline"){
             it.first.reply(buildString{
                 if(it.second.size == 0) append("Nothing to newline! (Expected ${Args.ANY} arguments, got 0)") else it.second.forEach{ appendNewline(it) }
-            }.take(2000))
+            }.enforce())
         }
         
         command("exec"){
             it.first.reply(buildString{
                 if(it.first.author!!.id != Vars.superuser) append("You cannot run this command.") else if(it.second.size == 0 ) append("No arguments specified! (Expected ${Args.ANY} arguments, got 0)") else append(OS.exec(*it.second))
-            }.take(2000))
+            }.blockWrap())
         }
     }
     

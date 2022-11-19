@@ -25,3 +25,9 @@ inline fun <reified T> Array<T>.copyWithoutFirstElement(): Array<T>{
 fun StringBuilder.appendNewline(obj: Any){
     this.append("$obj\n")
 }
+
+fun String.enforce(sub: Int = 0) = this.take(2000 - sub)
+
+fun String.blockWrap(): String{
+    return "```\n${this.enforce(8)}\n```"
+}
