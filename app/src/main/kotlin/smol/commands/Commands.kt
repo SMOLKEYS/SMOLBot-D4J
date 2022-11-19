@@ -21,7 +21,7 @@ object Commands{
     fun process(msg: Message){
         println("process start")
         var base = msg.content.trim().split(' ').toTypedArray()
-        println("typed array split begin")
+        println("typed array split begin on $base")
         if(base.size == 1){
             println("base size == 1")
             var args = base.copyWithoutFirstElement()
