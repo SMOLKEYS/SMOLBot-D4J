@@ -19,27 +19,27 @@ object Commands{
     }
     
     fun process(msg: Message){
-        println("process start on ${msg.content}")
+        //println("process start on ${msg.content}")
         var base = msg.content.trim().split(' ').toTypedArray()
-        println("typed array split begin on ${base.toList()}")
+        //println("typed array split begin on ${base.toList()}")
         if(base.size > 1){
-            println("base size > 1")
+            //println("base size > 1")
             val args = base.copyWithoutFirstElement()
-            println("args: ${args.toList()}")
+            //println("args: ${args.toList()}")
             
             if(registry.containsKey(base[0])){
-                println("registry contains ${base[0]}")
+                //println("registry contains ${base[0]}")
                 registry[base[0]](Pair(msg, args))
             }
         }else{
-            println("base size == 1")
+            //println("base size == 1")
             if(registry.containsKey(base[0])){
-                println("registry contains ${base[0]}")
+                //println("registry contains ${base[0]}")
                 registry[base[0]](Pair(msg, arrayOf<String>()))
             }
         }
         
-        println("registry: ${base[0]}: ${registry.containsKey(base[0])}")
+        //println("registry: ${base[0]}: ${registry.containsKey(base[0])}")
     }
     
     fun load(){

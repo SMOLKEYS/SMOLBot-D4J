@@ -75,7 +75,7 @@ suspend fun main(vararg args: String){
     
     Vars.client.on<MessageCreateEvent>{
         Commands.process(this.message)
-        println("message send detected")
+        //println("message send detected")
     }
     
     
