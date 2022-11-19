@@ -20,9 +20,9 @@ object Commands{
     
     fun process(msg: Message){
         println("process start")
-        if(registry.containsKey(msg.content.trim().split(' ')[0])){
+        var base = msg.content.trim().split(' ').toTypedArray()
+        if(registry.containsKey(base[0])){
             println("typed array split begin")
-            var base = msg.content.trim().split(' ').toTypedArray()
             if(base.size > 1){
                 println("base size > 1")
                 var args = base.copyWithoutFirstElement()
