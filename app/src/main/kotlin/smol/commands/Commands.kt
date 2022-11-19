@@ -76,7 +76,7 @@ object Commands{
             Vars.scriptContext.setAttribute("message", it.first, ScriptContext.ENGINE_SCOPE)
             
             val res = try{
-                if(it.first.author!!.id != Vars.superuser) throw IllegalArgumentException("You cannot run this command.")
+                if(it.first.author!!.id != Vars.superuser) throw Throwable("You cannot run this command.")
                 Vars.scriptEngine.eval(script).let{
                     when(it){
                         is Deferred<*> -> it.await()
@@ -91,6 +91,10 @@ object Commands{
             }
             
             it.first.reply("$res".blockWrap())
+        }
+        
+        command("help"){
+            
         }
     }
     

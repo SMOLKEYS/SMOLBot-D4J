@@ -1,6 +1,6 @@
 plugins{
 	kotlin("jvm") version "1.7.21"
-    //kotlin("plugin.serialization") version "1.7.21"
+    kotlin("plugin.serialization") version "1.7.21"
 	application
 }
 
@@ -13,6 +13,14 @@ repositories {
 dependencies{
     implementation("dev.kord:kord-core:0.8.0-M17")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
+    
+    
+	implementation("org.jetbrains.kotlin:kotlin-script-runtime:1.7.21")
+	implementation("org.jetbrains.kotlin:kotlin-script-util:1.7.21")
+	implementation("org.jetbrains.kotlin:kotlin-compiler-embeddable:1.7.21")
+	implementation("org.jetbrains.kotlin:kotlin-scripting-compiler-embeddable:1.7.21")
+	implementation("org.jetbrains.kotlin:kotlin-scripting-jsr223:1.7.21")
+	
     //implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
     
     //i ponder for a moment
