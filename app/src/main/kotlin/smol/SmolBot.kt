@@ -3,11 +3,13 @@ package smol
 import smol.*
 import smol.util.*
 import smol.console.*
+import smol.commands.*
 import java.util.*
 import kotlin.concurrent.*
 import kotlinx.coroutines.*
 import arc.math.*
 import dev.kord.core.*
+import dev.kord.core.event.message.*
 import dev.kord.core.entity.channel.*
 import dev.kord.core.behavior.channel.*
 import dev.kord.rest.builder.message.create.*
@@ -29,6 +31,8 @@ suspend fun main(vararg args: String){
     //mood
     Vars.statusReportChannel = Vars.client.getTextChannel(948818452678852628UL.toSnowflake())
     Vars.epochStatusChannel = Vars.client.getTextChannel(1043136089684201483UL.toSnowflake())
+    
+    Commands.load()
     
     Timer(true).schedule(1000 * 60 * 60 * 6L){
         Vars.client.launch{
@@ -61,6 +65,11 @@ suspend fun main(vararg args: String){
                 Vars.client.shutdown()
             }
         }
+    }
+    
+    
+    Vars.client.on<MessageCreateEvent>{
+        Commands.process(this.message)
     }
     
     
