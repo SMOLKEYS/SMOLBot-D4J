@@ -63,10 +63,7 @@ object Commands{
             Vars.client.launch{
                 it.first.reply{
                     content = buildString{
-                        if(it.second.size == 0){
-                            append("Nothing to newline! ")
-                            argument(Args.ANY, it.second.size)
-                        }else it.second.forEach{ appendNewline(it) }
+                        if(it.second.size == 0) append("Nothing to newline! (Expected ${Args.ANY} arguments, got 0)") else it.second.forEach{ appendNewline(it) }
                     }
                 }
             }
