@@ -110,7 +110,7 @@ object Commands{
                         val ref = it.first.refer()
                         
                         Vars.sfwArchive.createMessage{
-                            content = "By ${ref.author!!} in ${ref.channel.mention}:\n${ref.content.enforce(170)}\nUploaded by ${it.first.author!!}"
+                            content = "By ${ref.author!!.username} in ${ref.channel.mention}:\n${ref.content.enforce(170)}\nUploaded by ${it.first.author!!.username}".enforce()
                         }
                     }
                     "unsafe" -> {
@@ -119,7 +119,7 @@ object Commands{
                         val ref = it.first.refer()
                         
                         Vars.nsfwArchive.createMessage{
-                            content = "By ${ref.author!!} in ${ref.channel.mention}:\n${ref.content.enforce(170)}\nUploaded by ${it.first.author!!}"
+                            content = "By ${ref.author!!.username} in ${ref.channel.mention}:\n${ref.content.enforce(170)}\nUploaded by ${it.first.author!!.username}".enforce()
                         }
                     }
                     
