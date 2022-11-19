@@ -10,10 +10,10 @@ suspend fun Kord.getTextChannel(id: Snowflake) = this.getChannel(id) as TextChan
 fun Channel.toTextChannel() = this as TextChannel
 fun ULong.toSnowflake() = Snowflake(this)
 
-fun <T> Array<T>.copyWithoutFirstElement(): Array<T>{
+inline fun <reified T> Array<T>.copyWithoutFirstElement(): Array<T>{
     var dest = arrayOfNulls<T>(this.size - 1)
     System.arraycopy(this, 1, dest, 0, dest.size)
-    return dest
+    return dest as Array<T>
 }
 
 fun StringBuilder.appendNewline(obj: Any){

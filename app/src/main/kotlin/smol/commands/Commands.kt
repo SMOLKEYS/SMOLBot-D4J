@@ -4,10 +4,11 @@ import smol.util.*
 import arc.struct.*
 import dev.kord.core.*
 import dev.kord.core.entity.*
+import dev.kord.core.behavior.*
 
 object Commands{
     private val pref = "sm!"
-    val registry = ObjectMap<String, (Pair<Message, Array<String>>) -> Unit>
+    val registry = ObjectMap<String, (Pair<Message, Array<String>>) -> Unit>()
     
     fun command(name: String, proc: (Pair<Message, Array<String>>) -> Unit){
         registry.put(pref + name, proc)
@@ -28,13 +29,16 @@ object Commands{
     
     fun load(){
         command("ping"){
-            it.first.reply(buildString{
-                appendNewline("Pong!")
-                if(it.second.size > 0){
-                    append("Some arguments were detected! ")
-                    it.second.forEach{ append("$it ") }
+            it.first.reply{
+                content = buildString{
+                    appendNewline("Pong!")
+                    if(it.second.size > 0){
+                        append("Some arguments were detected! ( ")
+                        it.second.forEach{ append("$it ") }
+                        append(")")
+                    }
                 }
-            })
+            }
         }
     }
 }
