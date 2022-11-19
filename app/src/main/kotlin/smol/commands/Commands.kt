@@ -52,13 +52,17 @@ object Commands{
                     it.second.forEach{ append("$it ") }
                     append(")")
                 }
-            })
+            }.take(2000))
         }
         
         command("newline"){
             it.first.reply(buildString{
                 if(it.second.size == 0) append("Nothing to newline! (Expected ${Args.ANY} arguments, got 0)") else it.second.forEach{ appendNewline(it) }
             })
+        }
+        
+        command("exec"){
+            
         }
     }
     
