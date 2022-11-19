@@ -11,6 +11,8 @@ object Vars{
     lateinit var client: Kord
     lateinit var statusReportChannel: TextChannel
     lateinit var epochStatusChannel: TextChannel
+    lateinit var sfwArchive: TextChannel
+    lateinit var nsfwArchive: TextChannel
     var ubid = 0
     var epoch = 0L
     val superuser = 691650272166019164UL.toSnowflake()

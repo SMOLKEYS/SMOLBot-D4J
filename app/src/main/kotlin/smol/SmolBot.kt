@@ -32,6 +32,8 @@ suspend fun main(vararg args: String){
     //mood
     Vars.statusReportChannel = Vars.client.getTextChannel(948818452678852628UL.toSnowflake())
     Vars.epochStatusChannel = Vars.client.getTextChannel(1043136089684201483UL.toSnowflake())
+    Vars.sfwArchive = Vars.client.getTextChannel(948818170628698182UL.toSnowflake())
+    Vars.nsfwArchive = Vars.client.getTextChannel(948892839390113842UL.toSnowflake())
     
     
     Vars.client.launch{

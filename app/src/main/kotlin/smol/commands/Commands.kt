@@ -101,6 +101,33 @@ object Commands{
             })
         }
         
+        commands("archive"){
+            if(it.first.refer() != null){
+                when(it.second[0]){
+                    "safe" -> {
+                        it.first.reply("Uploaded message to centcom sfw archive.")
+                        
+                        val ref = it.first.refer()
+                        
+                        Vars.sfwArchive.createMessage{
+                            content = "By ${ref.author!!} in ${ref.channel.mention}:\n${ref.content.enforce(170)}\nUploaded by ${it.first.author!!}"
+                        }
+                    }
+                    "unsafe" -> {
+                        it.first.reply("Uploaded message to centcom *nsfw* archive.")
+                        
+                        val ref = it.first.refer()
+                        
+                        Vars.nsfwArchive.createMessage{
+                            content = "By ${ref.author!!} in ${ref.channel.mention}:\n${ref.content.enforce(170)}\nUploaded by ${it.first.author!!}"
+                        }
+                    }
+                    
+                    else -> it.first.reply("No/wrong arguments provided! (sfw/nsfw)")
+                }
+            }else it.first.reply("No message target found! (Use this command as a reply!)")
+        }
+        
         command("help"){
             
         }
