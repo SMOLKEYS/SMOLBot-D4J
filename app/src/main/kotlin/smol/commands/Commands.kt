@@ -21,17 +21,18 @@ object Commands{
     fun process(msg: Message){
         println("process start")
         var base = msg.content.trim().split(' ').toTypedArray()
-        println("typed array split begin on $base")
-        if(base.size == 1){
-            println("base size == 1")
-            var args = base.copyWithoutFirstElement()
+        println("typed array split begin on ${base.toList()}")
+        if(base.size > 1){
+            println("base size > 1")
+            val args = base.copyWithoutFirstElement()
+            println("args: ${args.toList()}")
             
             if(registry.containsKey(base[0])){
                 println("registry contains ${base[0]}")
                 registry[base[0]](Pair(msg, args))
             }
         }else{
-            println("base size > 1")
+            println("base size == 1")
             if(registry.containsKey(base[0])){
                 println("registry contains ${base[0]}")
                 registry[base[0]](Pair(msg, arrayOf<String>()))
