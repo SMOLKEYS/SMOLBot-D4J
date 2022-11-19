@@ -2,6 +2,7 @@ package smol.commands
 
 import smol.*
 import smol.util.*
+import smol.commands.*
 import arc.struct.*
 import dev.kord.core.*
 import dev.kord.core.entity.*
@@ -53,6 +54,19 @@ object Commands{
                             it.second.forEach{ append("$it ") }
                             append(")")
                         }
+                    }
+                }
+            }
+        }
+        
+        command("newline"){
+            Vars.client.launch{
+                it.first.reply{
+                    content = buildString{
+                        if(it.second.size == 0){
+                            append("Nothing to newline! ")
+                            argument(Args.ANY, it.second.size)
+                        }else it.second.forEach{ appendNewline(it) }
                     }
                 }
             }

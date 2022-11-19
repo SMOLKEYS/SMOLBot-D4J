@@ -19,3 +19,7 @@ inline fun <reified T> Array<T>.copyWithoutFirstElement(): Array<T>{
 fun StringBuilder.appendNewline(obj: Any){
     this.append("$obj\n")
 }
+
+fun StringBuilder.argument(app: Any, exp: Any){
+    this.append("(Expected $app arguments, got $exp)")
+}
