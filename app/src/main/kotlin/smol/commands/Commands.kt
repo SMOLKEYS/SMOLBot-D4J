@@ -17,8 +17,10 @@ import kotlinx.coroutines.*
 
 object Commands{
     private val pref = "sm!"
+    private val i = 0
+    private val i2 = 0
     val registry = ObjectMap<String, suspend (Pair<Message, Array<String>>) -> Unit>()
-    val pairs = mutableListOf<EmbedBuilder.Field>()
+    val chunks = mutableSetOf<MutableList<EmbedBuilder.Field>>(mutableListOf<EmbedBuilder.Field>())
     
     fun command(name: String, desc: String, proc: suspend (Pair<Message, Array<String>>) -> Unit){
         command(name, "`no arguments`", desc, proc)
@@ -27,10 +29,16 @@ object Commands{
     fun command(nameO: String, args: String, desc: String, proc: suspend (Pair<Message, Array<String>>) -> Unit){
         registry.put(pref + nameO, proc)
         println("command registered: $pref$nameO")
-        pairs.add(EmbedBuilder.Field().apply{
-            name = "$pref$nameO $args"
-            value = desc
-        })
+        if(i % 5 == 0){
+            chunks.add(mutableListOf<EmbedBuilder.Field>())
+            i2++
+        }else{
+            chunks[i2].add(EmbedBuilder.Field().apply{
+                name = "$pref$nameO $args"
+                value = desc
+            })
+            i++
+        }
     }
     
     suspend fun process(msg: Message){
@@ -58,6 +66,22 @@ object Commands{
     }
     
     fun load(){
+        command("help", "[int]", "Returns this help embed."){
+            it.first.reply{
+                
+                val ind = if(it.second[0].toIntOrNull() == null) 0 else it.second[0].toInt()
+                
+                embed{
+                    title = "Help (Chunk $ind)"
+                    description = "A list of all the commands SMOLBot has."
+                    
+                    fields = chunks[ind]
+                
+                    color = Color(colorRand(), colorRand(), colorRand())
+                }
+            }
+        }
+    
         command("ping", "Sends a \"Pong!\" message back to the caller."){
             it.first.reply(buildString{
                 appendNewline("Pong!")
@@ -158,19 +182,6 @@ object Commands{
                     else -> it.first.reply("Wrong arguments provided! (safe/unsafe)")
                 }
             }else it.first.reply("No message target found! (Use this command as a reply!)")
-        }
-        
-        command("help", "Returns this help embed."){
-            it.first.reply{
-                embed{
-                    title = "Help"
-                    description = "A list of all the commands SMOLBot has."
-                    
-                    fields = pairs
-                
-                    color = Color(colorRand(), colorRand(), colorRand())
-                }
-            }
         }
         
         command("space", "<int> <any...>", "Returns the inputted text in the second argument spaced out."){
