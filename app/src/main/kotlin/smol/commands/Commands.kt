@@ -17,10 +17,11 @@ import kotlinx.coroutines.*
 
 object Commands{
     private val pref = "sm!"
-    private val i = 0
-    private val i2 = 0
+    private var i = 0
+    private var i2 = 0
+    private var b = false
     val registry = ObjectMap<String, suspend (Pair<Message, Array<String>>) -> Unit>()
-    val chunks = mutableSetOf<MutableList<EmbedBuilder.Field>>(mutableListOf<EmbedBuilder.Field>())
+    val chunks = mutableListOf<MutableList<EmbedBuilder.Field>>(mutableListOf<EmbedBuilder.Field>())
     
     fun command(name: String, desc: String, proc: suspend (Pair<Message, Array<String>>) -> Unit){
         command(name, "`no arguments`", desc, proc)
@@ -29,15 +30,27 @@ object Commands{
     fun command(nameO: String, args: String, desc: String, proc: suspend (Pair<Message, Array<String>>) -> Unit){
         registry.put(pref + nameO, proc)
         println("command registered: $pref$nameO")
-        if(i % 5 == 0){
+        
+        if(i == 0){
+            chunks[i2].add(EmbedBuilder.Field().apply{
+                name = "$pref$nameO $args"
+                value = desc
+            })
+            i++
+            return
+        }
+        
+        if(i % 5 == 0 && !b){
             chunks.add(mutableListOf<EmbedBuilder.Field>())
             i2++
+            b = true
         }else{
             chunks[i2].add(EmbedBuilder.Field().apply{
                 name = "$pref$nameO $args"
                 value = desc
             })
             i++
+            b = false
         }
     }
     
