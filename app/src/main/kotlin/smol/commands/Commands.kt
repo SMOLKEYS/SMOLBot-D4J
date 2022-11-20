@@ -82,7 +82,7 @@ object Commands{
         command("help", "[int]", "Returns this help embed."){
             it.first.reply{
                 
-                val ind = if((it.second[0].toIntOrNull() == null) || it.second.isEmpty()) 0 else it.second[0].toInt()
+                val ind = if(it.second.isEmpty() || (it.second[0].toIntOrNull() == null)) 0 else it.second[0].toInt()
                 
                 embed{
                     title = "Help (Chunk $ind)"
