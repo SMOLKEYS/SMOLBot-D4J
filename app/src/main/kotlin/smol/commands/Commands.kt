@@ -32,7 +32,7 @@ object Commands{
         println("command registered: $pref$nameO")
             
         val page = registry.size / 5
-        val chunk = chunks.getOrNull(page) ?: mutableListOf().also { chunks.add(it) }
+        val chunk = chunks.getOrNull(page) ?: mutableListOf<EmbedBuilder.Field>().also { chunks.add(it) }
             
         chunk.add(EmbedBuilder.Field().apply{
             name = "$pref$nameO $args"
