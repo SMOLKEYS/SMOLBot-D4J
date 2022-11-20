@@ -45,8 +45,8 @@ fun StringBuilder.appendNewline(obj: Any){
     this.append("$obj\n")
 }
 
-/** Enforces a string, limiting it to only 2000 characters and replacing "e" chars with their russian variant. */
-fun String.enforce(sub: Int = 0) = this.take(2000 - sub).replace("e", "е")
+/** Enforces a string, limiting it to only 2000 characters and invalidating everyone/here pings. */
+fun String.enforce(sub: Int = 0) = this.take(2000 - sub).replace("@everyone", "@еveryone").replace("@here", "@hеrе")
 
 fun String.blockWrap(): String{
     return "```\n${this.enforce(8)}\n```"
