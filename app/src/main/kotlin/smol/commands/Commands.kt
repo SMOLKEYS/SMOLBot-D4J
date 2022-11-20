@@ -18,7 +18,7 @@ import kotlinx.coroutines.*
 object Commands{
     private val pref = "sm!"
     val registry = ObjectMap<String, suspend (Pair<Message, Array<String>>) -> Unit>()
-    val pairs = MutableList<EmbedBuilder.Field>()
+    val pairs = mutableListOf<EmbedBuilder.Field>()
     
     fun command(nameO: String, desc: String, proc: suspend (Pair<Message, Array<String>>) -> Unit){
         registry.put(pref + nameO, proc)
