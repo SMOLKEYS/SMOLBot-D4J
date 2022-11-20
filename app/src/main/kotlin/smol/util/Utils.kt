@@ -35,7 +35,7 @@ inline fun <reified T> Array<T>.copyWithoutFirstElement(): Array<T>{
     return dest as Array<T>
 }
 
-inline fun <reified T> Array<T>.copyWithoutFirstElements(n: Int){
+inline fun <reified T> Array<T>.copyWithoutFirstElements(n: Int): Array<T>{
     var dest = arrayOfNulls<T>(this.size - n)
     System.arraycopy(this, n, dest, 0, dest.size)
     return dest as Array<T>
