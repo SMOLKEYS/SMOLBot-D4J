@@ -11,6 +11,7 @@ import dev.kord.core.behavior.*
 import dev.kord.core.behavior.channel.*
 import dev.kord.rest.builder.message.*
 import dev.kord.rest.builder.message.create.*
+import dev.kord.common.*
 import javax.script.*
 import kotlinx.coroutines.*
 
@@ -19,14 +20,12 @@ object Commands{
     val registry = ObjectMap<String, suspend (Pair<Message, Array<String>>) -> Unit>()
     val pairs = MutableList<EmbedBuilder.Field>()
     
-    fun command(name: String, desc: String, proc: suspend (Pair<Message, Array<String>>) -> Unit){
-        registry.put(pref + name, proc)
-        println("command registered: $pref$name")
-        pairs.add(object : EmbedBuilder.Field(){
-            init{
-                name = pref + name
-                value = desc
-            }
+    fun command(nameO: String, desc: String, proc: suspend (Pair<Message, Array<String>>) -> Unit){
+        registry.put(pref + nameO, proc)
+        println("command registered: $pref$nameO")
+        pairs.add(EmbedBuilder.Field().apply{
+            name = pref + nameO
+            value = desc
         })
     }
     
