@@ -23,10 +23,19 @@ fun Channel.toVoiceChannel() = this as VoiceChannel
 
 fun ULong.toSnowflake() = Snowflake(this)
 
-suspend fun Message.reply(msg: String): Message = this.reply{ content = msg }
+suspend fun Message.reply(ment: Boolean = false, msg: String): Message{
+    return this.reply{
+        content = msg
+        if(!ment) allowedMentions()
+    }
+}
 
 suspend fun Message.refer(): Message? = this.referencedMessage
 
+suspend fun Message.enforce(): Message{
+    this.allowedMentions()
+    return this
+}
 
 
 inline fun <reified T> Array<T>.copyWithoutFirstElement(): Array<T>{
