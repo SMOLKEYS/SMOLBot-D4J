@@ -107,6 +107,7 @@ object Commands{
             it.first.reply("$res".blockWrap())
         }
         
+        //cleanup todo
         command("logout", "<bot ubid>", "Shuts down a bot instance with the specified ubid. Superuser only."){
             it.first.reply(buildString{
                 if(it.first.author!!.id != Vars.superuser) append("You cannot use this command.") else if(it.second.size == 0) append("Expected at least 1 argument, got none".blockWrap()) else if(it.second[0].toIntOrNull() == null) append("Invalid number.") else if(it.second[0].toInt() != Vars.ubid) append("Wrong number.") else{ append("Exiting..."); Vars.client.shutdown() }
@@ -152,6 +153,20 @@ object Commands{
                     color = Color(colorRand(), colorRand(), colorRand())
                 }
             }
+        }
+        
+        command("space", "<int> <any...>", "Returns the inputted text in the second argument spaced out."){
+            it.first.reply(buildString{
+                when{
+                    it.second[0].toIntOrNull() == null -> append("First argument is not a valid number!")
+                    it.second[1] == null -> append("No second argument supplied!")
+                    else -> {
+                        it.second.copyWithoutFirstElement().forEach{ k ->
+                            k.forEach{ n -> append(n + " ".repeat(it.second[0].toInt())) }
+                        }
+                    }
+                }
+            })
         }
     }
     

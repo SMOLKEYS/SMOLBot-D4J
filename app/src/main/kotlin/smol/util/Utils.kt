@@ -57,3 +57,4 @@ inline fun launch(crossinline l: suspend CoroutineScope.() -> Unit) = smol.Vars.
 inline fun <R> async(crossinline l: suspend CoroutineScope.() -> R) = smol.Vars.client.async{ l() };
 
 fun colorRand(): Int = Mathf.random(1, 255)
+
