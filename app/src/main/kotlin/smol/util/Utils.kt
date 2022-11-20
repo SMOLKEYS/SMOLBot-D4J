@@ -7,7 +7,7 @@ import dev.kord.core.entity.*
 import dev.kord.common.entity.*
 import dev.kord.common.entity.optional.*
 import dev.kord.core.entity.channel.*
-import dev.kord.core.behavior.reply
+import dev.kord.core.behavior.*
 import dev.kord.rest.builder.message.create.*
 import kotlinx.coroutines.*
 
@@ -24,7 +24,7 @@ fun Channel.toVoiceChannel() = this as VoiceChannel
 
 fun ULong.toSnowflake() = Snowflake(this)
 
-suspend fun Message.reply(ment: Boolean = false, msg: String): Message{
+suspend fun Message.reply(msg: String, ment: Boolean = false): Message{
     return this.reply{
         content = msg
         if(!ment) allowedMentions()
