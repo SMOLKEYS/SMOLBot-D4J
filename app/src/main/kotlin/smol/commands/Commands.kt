@@ -9,17 +9,25 @@ import dev.kord.core.*
 import dev.kord.core.entity.*
 import dev.kord.core.behavior.*
 import dev.kord.core.behavior.channel.*
+import dev.kord.rest.builder.message.*
+import dev.kord.rest.builder.message.create.*
 import javax.script.*
 import kotlinx.coroutines.*
 
 object Commands{
     private val pref = "sm!"
     val registry = ObjectMap<String, suspend (Pair<Message, Array<String>>) -> Unit>()
+    val pairs = MutableList<EmbedBuilder.Field>()
     
-    fun command(name: String, proc: suspend (Pair<Message, Array<String>>) -> Unit){
+    fun command(name: String, desc: String, proc: suspend (Pair<Message, Array<String>>) -> Unit){
         registry.put(pref + name, proc)
         println("command registered: $pref$name")
-        
+        pairs.add(object : EmbedBuilder.Field(){
+            init{
+                name = pref + name
+                value = desc
+            }
+        })
     }
     
     suspend fun process(msg: Message){
@@ -47,7 +55,7 @@ object Commands{
     }
     
     fun load(){
-        command("ping"){
+        command("ping", "Sends a \"Pong!\" message back to the caller."){
             it.first.reply(buildString{
                 appendNewline("Pong!")
                 if(it.second.size > 0){
@@ -58,19 +66,19 @@ object Commands{
             }.enforce())
         }
         
-        command("newline"){
+        command("newline", "Repeats each argument with a newline."){
             it.first.reply(buildString{
                 if(it.second.size == 0) append("Nothing to newline! (Expected ${Args.ANY} arguments, got 0)") else it.second.forEach{ appendNewline(it) }
             }.enforce())
         }
         
-        command("exec"){
+        command("exec", "Executes a shell command. Extremely dangerous.  Superuser only."){
             it.first.reply(buildString{
                 if(it.first.author!!.id != Vars.superuser) append("You cannot run this command.") else if(it.second.size == 0 ) append("No arguments specified! (Expected ${Args.ANY} arguments, got 0)") else append(OS.exec(*it.second))
             }.blockWrap())
         }
         
-        command("eval"){
+        command("eval", "Evaluates `kts` code. Extremely dangerous. Superuser only."){
             val script = it.first.content.substring(8)
             
             Vars.scriptEngine.put("message", it.first)
@@ -96,13 +104,13 @@ object Commands{
             it.first.reply("$res".blockWrap())
         }
         
-        command("logout"){
+        command("logout", "Shuts down a bot instance with the specified ubid. Superuser only."){
             it.first.reply(buildString{
                 if(it.first.author!!.id != Vars.superuser) append("You cannot use this command.") else if(it.second.size == 0) append("Expected at least 1 argument, got none".blockWrap()) else if(it.second[0].toIntOrNull() == null) append("Invalid number.") else if(it.second[0].toInt() != Vars.ubid) append("Wrong number.") else{ append("Exiting..."); Vars.client.shutdown() }
             })
         }
         
-        command("archive"){
+        command("archive", "Archives a message and its attachments (as links) to the SmolBot CentCom server."){
             if(it.first.refer() != null){
                 when(it.second[0]){
                     "safe" -> {
@@ -130,8 +138,17 @@ object Commands{
             }else it.first.reply("No message target found! (Use this command as a reply!)")
         }
         
-        command("help"){
-            
+        command("help", "Returns this help embed."){
+            it.first.reply{
+                embed{
+                    title = "Help"
+                    description = "A list of all the commands SMOLBot has."
+                    
+                    fields = pairs
+                
+                    color = Color(colorRand(), colorRand(), colorRand())
+                }
+            }
         }
     }
     

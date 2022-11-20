@@ -1,5 +1,6 @@
 package smol.util
 
+import arc.math.*
 import smol.*
 import dev.kord.core.*
 import dev.kord.core.entity.*
@@ -48,3 +49,5 @@ fun String.blockWrap(): String{
 inline fun launch(crossinline l: suspend CoroutineScope.() -> Unit) = smol.Vars.client.launch{ l() };
 
 inline fun <R> async(crossinline l: suspend CoroutineScope.() -> R) = smol.Vars.client.async{ l() };
+
+fun colorRand(): Int = Mathf.random(1, 255)
