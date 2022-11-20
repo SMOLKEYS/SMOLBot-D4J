@@ -33,11 +33,6 @@ suspend fun Message.reply(msg: String, ment: Boolean = false): Message{
 
 suspend fun Message.refer(): Message? = this.referencedMessage
 
-suspend fun Message.enforce(): Message{
-    this.allowedMentions()
-    return this
-}
-
 
 inline fun <reified T> Array<T>.copyWithoutFirstElement(): Array<T>{
     var dest = arrayOfNulls<T>(this.size - 1)
