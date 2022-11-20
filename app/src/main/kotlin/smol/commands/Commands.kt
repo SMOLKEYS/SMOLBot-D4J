@@ -122,8 +122,17 @@ object Commands{
                         
                         val ref = it.first.refer()!!
                         
-                        Vars.sfwArchive.createMessage{
-                            content = "By ${ref.author!!.username} in ${ref.channel.mention}:\n${ref.content.enforce(170)}\nUploaded by ${it.first.author!!.username}".enforce()
+                        //text content
+                        Vars.sfwArchive.createMessage("By ${ref.author!!.username} in ${ref.channel.mention}:\n${ref.content.enforce(170)}\nUploaded by ${it.first.author!!.username}".enforce())
+                        
+                        //text attachments (as urls), if any
+                        if(!ref.attachments.isEmpty()){
+                            Vars.sfwArchive.createMessage(buildString{
+                                appendNewline("Attachments:")
+                                ref.attachments.forEach{
+                                    appendNewline(it.url)
+                                }
+                            })
                         }
                     }
                     
@@ -132,8 +141,15 @@ object Commands{
                         
                         val ref = it.first.refer()!!
                         
-                        Vars.nsfwArchive.createMessage{
-                            content = "By ${ref.author!!.username} in ${ref.channel.mention}:\n${ref.content.enforce(170)}\nUploaded by ${it.first.author!!.username}".enforce()
+                        Vars.nsfwArchive.createMessage("By ${ref.author!!.username} in ${ref.channel.mention}:\n${ref.content.enforce(170)}\nUploaded by ${it.first.author!!.username}".enforce())
+                        
+                        if(!ref.attachments.isEmpty()){
+                            Vars.nsfwArchive.createMessage(buildString{
+                                appendNewline("Attachments:")
+                                ref.attachments.forEach{
+                                    appendNewline(it.url)
+                                }
+                            })
                         }
                     }
                     
