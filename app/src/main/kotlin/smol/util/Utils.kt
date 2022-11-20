@@ -8,6 +8,7 @@ import dev.kord.common.entity.*
 import dev.kord.common.entity.optional.*
 import dev.kord.core.entity.channel.*
 import dev.kord.core.behavior.reply
+import dev.kord.rest.builder.message.create.*
 import kotlinx.coroutines.*
 
 suspend fun Kord.getTextChannel(id: Snowflake) = this.getChannel(id) as TextChannel
