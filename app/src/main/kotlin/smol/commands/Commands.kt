@@ -82,7 +82,7 @@ object Commands{
         command("help", "[int]", "Returns this help embed."){
             it.first.reply{
                 
-                val ind = if(it.second[0].toIntOrNull() == null) 0 else it.second[0].toInt()
+                val ind = if((it.second[0].toIntOrNull() == null) || (it.second[0] == null)) 0 else it.second[0].toInt()
                 
                 embed{
                     title = "Help (Chunk $ind)"
@@ -123,6 +123,9 @@ object Commands{
             
             Vars.scriptEngine.put("message", it.first)
             Vars.scriptContext.setAttribute("message", it.first, ScriptContext.ENGINE_SCOPE)
+            
+            Vars.scriptEngine.put("args", it.second)
+            Vars.scriptContext.setAttribute("args", it.second, ScriptContext.ENGINE_SCOPE)
             
             val res = try{
                 if(it.first.author!!.id != Vars.superuser) throw Throwable("You cannot run this command.")
