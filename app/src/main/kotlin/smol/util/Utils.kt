@@ -35,6 +35,12 @@ inline fun <reified T> Array<T>.copyWithoutFirstElement(): Array<T>{
     return dest as Array<T>
 }
 
+inline fun <reified T> Array<T>.copyWithoutFirstElements(n: Int){
+    var dest = arrayOfNulls<T>(this.size - n)
+    System.arraycopy(this, n, dest, 0, dest.size)
+    return dest as Array<T>
+}
+
 fun StringBuilder.appendNewline(obj: Any){
     this.append("$obj\n")
 }
