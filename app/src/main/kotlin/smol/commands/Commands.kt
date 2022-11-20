@@ -17,9 +17,6 @@ import kotlinx.coroutines.*
 
 object Commands{
     private val pref = "sm!"
-    private var i = 0
-    private var i2 = 0
-    private var b = false
     val registry = ObjectMap<String, suspend (Pair<Message, Array<String>>) -> Unit>()
     val chunks = mutableListOf<MutableList<EmbedBuilder.Field>>(mutableListOf<EmbedBuilder.Field>())
     
@@ -71,7 +68,7 @@ object Commands{
                 val ind = if(it.second.isEmpty() || (it.second[0].toIntOrNull() == null)) 0 else it.second[0].toInt()
                 
                 embed{
-                    title = "Help (Chunk $ind/$i2)"
+                    title = "Help (Chunk $ind)"
                     description = "A list of all the commands SMOLBot has."
                     
                     fields = chunks[ind]
