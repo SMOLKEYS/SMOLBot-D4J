@@ -30,28 +30,14 @@ object Commands{
     fun command(nameO: String, args: String, desc: String, proc: suspend (Pair<Message, Array<String>>) -> Unit){
         registry.put(pref + nameO, proc)
         println("command registered: $pref$nameO")
-        
-        if(i == 0){
-            chunks[i2].add(EmbedBuilder.Field().apply{
-                name = "$pref$nameO $args"
-                value = desc
-            })
-            i++
-            return
-        }
-        
-        if(i % 5 == 0 && !b){
-            chunks.add(mutableListOf<EmbedBuilder.Field>())
-            i2++
-            b = true
-        }else{
-            chunks[i2].add(EmbedBuilder.Field().apply{
-                name = "$pref$nameO $args"
-                value = desc
-            })
-            i++
-            b = false
-        }
+            
+        val page = registry.size / 5
+        val chunk = chunks.getOrNull(page) ?: mutableListOf().also { chunks.add(it) }
+            
+        chunk.add(EmbedBuilder.Field().apply{
+            name = "$pref$nameO $args"
+            value = desc
+        })
     }
     
     suspend fun process(msg: Message){
