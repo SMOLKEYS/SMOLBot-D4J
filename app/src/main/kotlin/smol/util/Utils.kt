@@ -80,3 +80,4 @@ inline fun <R> async(crossinline l: suspend CoroutineScope.() -> R) = smol.Vars.
 
 fun colorRand(): Int = Mathf.random(1, 255)
 
+fun linkage(text: String, link: String) = "**[$text]($link)**"

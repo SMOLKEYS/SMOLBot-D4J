@@ -186,6 +186,19 @@ object Commands{
                 }
             }.enforce())
         }
+        
+        command("links", "Returns an embed containing links."){
+            it.first.reply{
+                embed{
+                    title = "Links"
+                    description = "Ehh, some links."
+                    
+                    fields = Vars.links
+                    
+                    color = Color(colorRand(), colorRand(), colorRand())
+                }
+            }
+        }
     }
     
     fun afterLoad(){

@@ -5,6 +5,7 @@ import java.util.Vector
 import dev.kord.core.*
 import dev.kord.common.entity.*
 import dev.kord.core.entity.channel.*
+import dev.kord.rest.builder.message.*
 import javax.script.*
 
 object Vars{
@@ -16,7 +17,18 @@ object Vars{
     var ubid = 0
     var epoch = 0L
     val superuser = 691650272166019164UL.toSnowflake()
+    
     val bruh = arrayOf("kordin' time", "balls", "kord", "smolkeys", "nothing")
+    
+    val links = mutableListOf(
+        EmbedBuilder.Field().apply{
+            value = linkage("Invite Bot", "https://discord.com/oauth2/authorize?client_id=946790508737491004&permissions=2147483647&scope=bot")
+            
+        },
+        EmbedBuilder.Field().apply{
+            value = linkage("SmolBot CentCom Invite", "https://discord.gg/8syZQdqhwy")
+        }
+    )
     
     val scriptEngine by lazy{
         ScriptEngineManager(Thread.currentThread().contextClassLoader).getEngineByExtension("kts")!!
