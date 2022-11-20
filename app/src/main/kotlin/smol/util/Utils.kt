@@ -27,7 +27,7 @@ fun ULong.toSnowflake() = Snowflake(this)
 suspend fun Message.reply(msg: String, ment: Boolean = false): Message{
     return this.reply{
         content = msg
-        if(!ment) allowedMentions()
+        if(!ment) allowedMentions{}
     }
 }
 
