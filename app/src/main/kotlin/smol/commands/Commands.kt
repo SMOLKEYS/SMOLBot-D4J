@@ -107,7 +107,7 @@ object Commands{
             it.first.reply("$res".blockWrap())
         }
         
-        command("logout", "<bot ubid>" "Shuts down a bot instance with the specified ubid. Superuser only."){
+        command("logout", "<bot ubid>", "Shuts down a bot instance with the specified ubid. Superuser only."){
             it.first.reply(buildString{
                 if(it.first.author!!.id != Vars.superuser) append("You cannot use this command.") else if(it.second.size == 0) append("Expected at least 1 argument, got none".blockWrap()) else if(it.second[0].toIntOrNull() == null) append("Invalid number.") else if(it.second[0].toInt() != Vars.ubid) append("Wrong number.") else{ append("Exiting..."); Vars.client.shutdown() }
             })
