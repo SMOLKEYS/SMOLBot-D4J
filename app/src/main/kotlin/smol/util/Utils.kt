@@ -26,9 +26,9 @@ fun Channel.toVoiceChannel() = this as VoiceChannel
 fun ULong.toSnowflake() = Snowflake(this)
 
 suspend fun MessageChannelBehavior.createMessage(msg: UserMessageCreateBuilder.() -> Unit, ment: Boolean = false): Message{
-    return this.createMessage{ p ->
+    return this.createMessage{ p: UserMessageCreateBuilder ->
         msg(p)
-        if(!ment) allowedMentions()
+        if(!ment) p.allowedMentions()
     }
 }
 
@@ -37,9 +37,9 @@ suspend fun MessageChannelBehavior.createMessage(msg: String, ment: Boolean = fa
 }
 
 suspend fun Message.reply(msg: UserMessageCreateBuilder.() -> Unit, ment: Boolean = false): Message{
-    return this.reply{ p ->
+    return this.reply{ p: UserMessageCreateBuilder ->
         msg(p)
-        if(!ment) allowedMentions()
+        if(!ment) p.allowedMentions()
     }
 }
 
