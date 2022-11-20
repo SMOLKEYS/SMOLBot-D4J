@@ -82,7 +82,7 @@ object Commands{
         command("help", "[int]", "Returns this help embed."){
             it.first.reply{
                 
-                val ind = if((it.second[0].toIntOrNull() == null) || (it.second[0] == null)) 0 else it.second[0].toInt()
+                val ind = if((it.second[0].toIntOrNull() == null) || it.second.isEmpty()) 0 else it.second[0].toInt()
                 
                 embed{
                     title = "Help (Chunk $ind)"
@@ -108,13 +108,13 @@ object Commands{
         
         command("newline", "<any...>", "Repeats each argument with a newline."){
             it.first.reply(buildString{
-                if(it.second.size == 0) append("Nothing to newline! (Expected ${Args.ANY} arguments, got 0)") else it.second.forEach{ appendNewline(it) }
+                if(it.second.isEmpty()) append("Nothing to newline! (Expected ${Args.ANY} arguments, got 0)") else it.second.forEach{ appendNewline(it) }
             }.enforce())
         }
         
         command("exec", "<any...>", "Executes a shell command. Extremely dangerous.  Superuser only."){
             it.first.reply(buildString{
-                if(it.first.author!!.id != Vars.superuser) append("You cannot run this command.") else if(it.second.size == 0 ) append("No arguments specified! (Expected ${Args.ANY} arguments, got 0)") else append(OS.exec(*it.second))
+                if(it.first.author!!.id != Vars.superuser) append("You cannot run this command.") else if(it.second.isEmpty()) append("No arguments specified! (Expected ${Args.ANY} arguments, got 0)") else append(OS.exec(*it.second))
             }.blockWrap())
         }
         
@@ -150,7 +150,7 @@ object Commands{
         //cleanup todo
         command("logout", "<bot ubid>", "Shuts down a bot instance with the specified ubid. Superuser only."){
             it.first.reply(buildString{
-                if(it.first.author!!.id != Vars.superuser) append("You cannot use this command.") else if(it.second.size == 0) append("Expected at least 1 argument, got none".blockWrap()) else if(it.second[0].toIntOrNull() == null) append("Invalid number.") else if(it.second[0].toInt() != Vars.ubid) append("Wrong number.") else{ append("Exiting..."); Vars.client.shutdown() }
+                if(it.first.author!!.id != Vars.superuser) append("You cannot use this command.") else if(it.second.isEmpty()) append("Expected at least 1 argument, got none".blockWrap()) else if(it.second[0].toIntOrNull() == null) append("Invalid number.") else if(it.second[0].toInt() != Vars.ubid) append("Wrong number.") else{ append("Exiting..."); Vars.client.shutdown() }
             })
         }
         
