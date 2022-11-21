@@ -84,11 +84,12 @@ fun linkage(text: String, link: String) = "**[$text]($link)**"
 
 suspend fun uinfo(usr: User, guild: Snowflake): String{
     return buildString{
+        val ext = usr.asMember(guild)
         appendNewline("Name/Tag: ${usr.tag}")
-        if(usr.nickname !is null) appendNewline("Nickname: ${usr.nickname}")
-        appendNewline("Join Date: ${usr.asMember(guild).joinedAt}")
+        if(ext.nickname !is null) appendNewline("Nickname: ${ext.nickname}")
+        appendNewline("Join Date: ${ext.joinedAt}")
         append("Roles: ")
-        usr.roles.collect{ append(it.mention + " ") }
+        ext.roles.collect{ append(it.mention + " ") }
         appendNewline("")
         appendNewline("Is Bot: ${usr.isBot}")
     }
