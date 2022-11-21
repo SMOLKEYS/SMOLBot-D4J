@@ -1,21 +1,17 @@
 package smol.struct
 
 open class Chunk<T>(val size: Int){
-    private var ind = 0
-    private var ind2 = 0
-    private val holder = mutableListOf<MutableList<T>>(mutableListOf<T>())
+    private val holder = mutableListOf<MutableList<T>>()
     
-    var holderSize = 0
+    var totalElements = 0
     
     fun add(element: T): Chunk<T>{
-        if(holder[ind2].size > size){
-            holder.add(mutableListOf<T>())
-            ind2++
-            holderSize++
-        }else{
-            holder[ind2].add(element)
-            ind++
-        }
+        if(totalElements % size == 0 && totalElements != 0) holder.add(mutableListOf<T>())
+
+        val chunk = holder[totalElements / size]
+        
+        chunk.add(element)
+        totalElements++
         
         return this
     }
