@@ -7,7 +7,7 @@ open class Chunk<T>(val size: Int){
     var totalChunks = 0
     
     fun add(element: T): Chunk<T>{
-        val index = totalElements / size - 1
+        val index = totalChunks / size - 1
         val chunk = holder.getOrNull(index) ?: mutableListOf<T>().also{ holder.add(it); totalChunks++ }
         
         chunk.add(element)
