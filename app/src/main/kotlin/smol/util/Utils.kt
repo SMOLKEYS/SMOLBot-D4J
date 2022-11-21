@@ -86,7 +86,7 @@ suspend fun uinfo(usr: User, guild: Snowflake): String{
     return buildString{
         val ext = usr.asMember(guild)
         appendNewline("Name/Tag: ${usr.tag}")
-        if(ext.nickname !is null) appendNewline("Nickname: ${ext.nickname}")
+        if(ext.nickname != null) appendNewline("Nickname: ${ext.nickname!!}")
         appendNewline("Join Date: ${ext.joinedAt}")
         append("Roles: ")
         ext.roles.collect{ append(it.mention + " ") }
