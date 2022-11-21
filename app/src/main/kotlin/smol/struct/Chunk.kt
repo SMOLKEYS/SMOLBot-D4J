@@ -9,7 +9,7 @@ open class Chunk<T>(val size: Int){
     fun add(element: T): Chunk<T>{
         val chunk = holder[totalChunks]
         
-        if(chunk.size != size){
+        if(chunk.size != size + 1){
             chunk.add(element)
             totalElements++
         }else{
