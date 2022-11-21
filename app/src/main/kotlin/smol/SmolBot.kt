@@ -76,7 +76,9 @@ suspend fun main(vararg args: String){
     
     
     Vars.client.on<MessageCreateEvent>{
-        if(this.message.author!!.id != Vars.client.editSelf{}.id) Commands.process(this.message)
+        if(this.message.author?.isBot != false) return@on
+        
+        Commands.process(this.message)
         //println("message send detected")
     }
     
