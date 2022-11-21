@@ -4,7 +4,7 @@ open class Chunk<T>(val size: Int){
     private val holder = mutableListOf<MutableList<T>>(mutableListOf<T>())
     
     var totalElements = 0
-    var totalChunks = 1
+    var totalChunks = 0
     
     fun add(element: T): Chunk<T>{
         val chunk = holder[totalChunks]
