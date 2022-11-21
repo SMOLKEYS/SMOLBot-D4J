@@ -217,7 +217,7 @@ object Commands{
             }
         }
         
-        command("info", "[bot/you/userid]", "Gives information about either the bot, you, or the user id. Defaults to you."){
+        command("info", "[bot/you/user <id>]", "Gives information about either the bot, you, or a user id. Defaults to you."){
             it.first.reply{
                 val pred = when{
                     it.second.isEmpty() -> "you"
@@ -232,6 +232,17 @@ object Commands{
                             description = uinfo(usr, it.first.getGuild().id)
                             
                         }
+                    }
+                    
+                    "bot" -> {
+                        embed{
+                            title = "SMOLBot"
+                            description = uinfo(Vars.client, it.first.getGuild().id)
+                        }
+                    }
+                    
+                    "user" -> {
+                        
                     }
                 }
             }

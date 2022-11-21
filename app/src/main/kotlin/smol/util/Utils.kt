@@ -82,6 +82,8 @@ fun colorRand(): Int = Mathf.random(1, 255)
 
 fun linkage(text: String, link: String) = "**[$text]($link)**"
 
+suspend fun uinfo(kord: Kord, guild: Snowflake) = uinfo(kord.editSelf{}, guild)
+
 suspend fun uinfo(usr: User, guild: Snowflake): String{
     return buildString{
         val ext = usr.asMember(guild)
