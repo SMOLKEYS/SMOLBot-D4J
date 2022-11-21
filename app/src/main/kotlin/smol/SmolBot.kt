@@ -28,7 +28,7 @@ suspend fun main(vararg args: String){
         
     }
     
-    Vars.ubid = Mathf.random(197360, 9801630)
+    Vars.ubid = (1..6).map{ Vars.chars.random() }.joinToString("")
     //mood
     Vars.statusReportChannel = Vars.client.getTextChannel(948818452678852628UL.toSnowflake())
     Vars.epochStatusChannel = Vars.client.getTextChannel(1043136089684201483UL.toSnowflake())

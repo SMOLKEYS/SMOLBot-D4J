@@ -81,3 +81,15 @@ inline fun <R> async(crossinline l: suspend CoroutineScope.() -> R) = smol.Vars.
 fun colorRand(): Int = Mathf.random(1, 255)
 
 fun linkage(text: String, link: String) = "**[$text]($link)**"
+
+suspend fun uinfo(usr: User, guild: Snowflake): String{
+    return buildString{
+        appendNewline("Name/Tag: ${usr.tag}")
+        if(usr.nickname !is null) appendNewline("Nickname: ${usr.nickname}")
+        appendNewline("Join Date: ${usr.asMember(guild).joinedAt}")
+        append("Roles: ")
+        usr.roles.collect{ append(it.mention + " ") }
+        appendNewline("")
+        appendNewline("Is Bot: ${usr.isBot}")
+    }
+}

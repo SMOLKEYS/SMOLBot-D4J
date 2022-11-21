@@ -14,11 +14,13 @@ object Vars{
     lateinit var epochStatusChannel: TextChannel
     lateinit var sfwArchive: TextChannel
     lateinit var nsfwArchive: TextChannel
-    var ubid = 0
+    var ubid = "ubid"
     var epoch = 0L
     val superuser = 691650272166019164UL.toSnowflake()
     
     val bruh = arrayOf("kordin' time", "balls", "kord", "smolkeys", "nothing")
+    
+    val chars = ('a'..'z') + ('0'..'9')
     
     val links = mutableListOf(
         EmbedBuilder.Field().apply{

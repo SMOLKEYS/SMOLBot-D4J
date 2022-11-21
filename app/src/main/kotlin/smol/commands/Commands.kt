@@ -129,9 +129,18 @@ object Commands{
         }
         
         //cleanup todo
-        command("logout", "<bot ubid>", "Shuts down a bot instance with the specified ubid. Superuser only."){
+        command("logout", "<string>", "Shuts down a bot instance with the specified ubid. Superuser only."){
             it.first.reply(buildString{
-                if(it.first.author!!.id != Vars.superuser) append("You cannot use this command.") else if(it.second.isEmpty()) append("Expected at least 1 argument, got none".blockWrap()) else if(it.second[0].toIntOrNull() == null) append("Invalid number.") else if(it.second[0].toInt() != Vars.ubid) append("Wrong number.") else{ append("Exiting..."); Vars.client.shutdown() }
+                when(it.first.author!!.id){
+                    Vars.superuser -> {
+                        if(it.second.isEmpty()) append("No argument supplied!")
+                        when(it.second[0]){
+                            Vars.ubid -> Vars.client.shutdown()
+                            else -> append("Incorrect ubid!")
+                        }
+                    }
+                    else -> append("No.")
+                }
             })
         }
         
@@ -204,6 +213,26 @@ object Commands{
                     fields = Vars.links
                     
                     color = Color(colorRand(), colorRand(), colorRand())
+                }
+            }
+        }
+        
+        command("info", "[bot/you/userid]", "Gives information about either the bot, you, or the user id. Defaults to you."){
+            it.first.reply{
+                val pred = when{
+                    it.second.isEmpty() -> "you"
+                    else -> it.second[0]
+                }
+                
+                when(pred){
+                    "you" -> {
+                        embed{
+                            val usr = it.first.author!!
+                            title = "${usr.tag}"
+                            description = uinfo(usr, it.first.getGuild().id)
+                            
+                        }
+                    }
                 }
             }
         }
