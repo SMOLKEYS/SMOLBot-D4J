@@ -5,10 +5,13 @@ open class Chunk<T>(val size: Int){
     private var ind2 = 0
     private val holder = mutableListOf<MutableList<T>>(mutableListOf<T>())
     
+    var holderSize = 0
+    
     fun add(element: T): Chunk<T>{
         if(holder[ind2].size > size - 1){
             holder.add(mutableListOf<T>())
             ind2++
+            holderSize++
         }else{
             holder[ind2].add(element)
             ind++
