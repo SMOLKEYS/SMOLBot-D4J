@@ -4,6 +4,7 @@ open class Chunk<T>(val size: Int){
     private val holder = mutableListOf<MutableList<T>>()
     
     var totalElements = 0
+    var totalChunks = 0
     
     fun add(element: T): Chunk<T>{
         if(totalElements % size == 0 && totalElements != 0) holder.add(mutableListOf<T>())
@@ -12,6 +13,8 @@ open class Chunk<T>(val size: Int){
         
         chunk.add(element)
         totalElements++
+        
+        totalChunks = totalElements / size
         
         return this
     }

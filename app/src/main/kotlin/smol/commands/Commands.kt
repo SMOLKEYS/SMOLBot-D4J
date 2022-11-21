@@ -66,7 +66,7 @@ object Commands{
                 val ind = if(it.second.isEmpty() || (it.second[0].toIntOrNull() == null)) 0 else it.second[0].toInt()
                 
                 embed{
-                    title = "Help (Chunk $ind/${chunks.holderSize})"
+                    title = "Help (Chunk $ind/${chunks.totalChunks})"
                     description = "A list of all the commands SMOLBot has."
                     
                     fields = chunks[ind]
