@@ -8,7 +8,7 @@ open class Chunk<T>(val size: Int){
     var holderSize = 0
     
     fun add(element: T): Chunk<T>{
-        if(holder[ind2].size > size - 1){
+        if(holder[ind2].size > size){
             holder.add(mutableListOf<T>())
             ind2++
             holderSize++
