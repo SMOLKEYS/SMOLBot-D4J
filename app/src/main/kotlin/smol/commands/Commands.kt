@@ -3,6 +3,7 @@ package smol.commands
 import arc.util.*
 import smol.*
 import smol.util.*
+import smol.struct.*
 import smol.commands.*
 import arc.struct.*
 import dev.kord.core.*
@@ -18,7 +19,7 @@ import kotlinx.coroutines.*
 object Commands{
     private val pref = "sm!"
     val registry = ObjectMap<String, suspend (Pair<Message, Array<String>>) -> Unit>()
-    val chunks = mutableListOf<MutableList<EmbedBuilder.Field>>(mutableListOf<EmbedBuilder.Field>())
+    val chunks = Chunk<EmbedBuilder.Field>(5)
     
     fun command(name: String, desc: String, proc: suspend (Pair<Message, Array<String>>) -> Unit){
         command(name, "`no arguments`", desc, proc)
@@ -28,10 +29,7 @@ object Commands{
         registry.put(pref + nameO, proc)
         println("command registered: $pref$nameO")
             
-        val page = registry.size / 5
-        val chunk = chunks.getOrNull(page) ?: mutableListOf<EmbedBuilder.Field>().also { chunks.add(it) }
-            
-        chunk.add(EmbedBuilder.Field().apply{
+        chunks.add(EmbedBuilder.Field().apply{
             name = "$pref$nameO $args"
             value = desc
         })
@@ -86,7 +84,7 @@ object Commands{
                     it.second.forEach{ append("$it ") }
                     append(")")
                 }
-            }.enforce())
+            }.enforce(), true)
         }
         
         command("newline", "<any...>", "Repeats each argument with a newline."){
