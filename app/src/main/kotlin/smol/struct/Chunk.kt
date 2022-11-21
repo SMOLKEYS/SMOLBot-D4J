@@ -15,7 +15,7 @@ open class Chunk<T>(val size: Int){
         if(totalElements % size == 0){
             holder.add(mutableListOf<T>())
             totalChunks++
-            if(totalChunks != 0) holder.removeAt(totalChunks)
+            if(totalChunks != 0 && chunk.size == size) holder.removeAt(totalChunks)
         }
         
         return this
