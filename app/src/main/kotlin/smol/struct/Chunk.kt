@@ -9,12 +9,15 @@ open class Chunk<T>(val size: Int){
     fun add(element: T): Chunk<T>{
         val chunk = holder[totalChunks]
         
-        if(chunk.size != size + 1){
+        if(chunk.size != size){
             chunk.add(element)
             totalElements++
         }else{
             holder.add(mutableListOf<T>())
             totalChunks++
+            
+            holder[totalChunks].add(element)
+            totalElements++
         }
         
         
