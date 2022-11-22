@@ -249,7 +249,7 @@ object Commands{
                             if(usrid != null){
                                 val usr = if(usrid.toULongOrNull() == null) it.first.author!!.id else usrid.toULong().toSnowflake()
                                 title = "User"
-                                description = uinfo(gui.getUser(usr), gui.id)
+                                description = uinfo(gui.getMember(usr), gui.id)
                             }else{
                                 title = "???"
                                 description = "Unknown user!"
