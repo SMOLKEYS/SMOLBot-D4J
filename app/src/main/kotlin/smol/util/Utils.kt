@@ -88,7 +88,7 @@ fun linkage(text: String, link: String) = "**[$text]($link)**"
 
 
 suspend fun uinfo(kord: Kord, guild: Guild?): String{
-    return uinfo(kord.editSelf{}, guild)
+    return uinfo(userFrom(kord.selfId)!!, guild)
 }
 
 suspend fun uinfo(usr: User, guild: Guild?): String{

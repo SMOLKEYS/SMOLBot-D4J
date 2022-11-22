@@ -224,6 +224,8 @@ object Commands{
                     else -> it.second[0]
                 }
                 
+                val col = Color(colorRand(), colorRand(), colorRand())
+                
                 when(pred){
                     "you" -> {
                         embed{
@@ -231,6 +233,11 @@ object Commands{
                             title = "${usr.tag}"
                             description = uinfo(usr, it.first.getGuildOrNull())
                             
+                            color = col
+                            
+                            thumbnail{
+                                url = usr.avatar!!.cdnUrl.toUrl()
+                            }
                         }
                     }
                     
@@ -238,6 +245,12 @@ object Commands{
                         embed{
                             title = "SMOLBot"
                             description = uinfo(Vars.client, it.first.getGuildOrNull())
+                            
+                            color = col
+                            
+                            thumbnail{
+                                url = userFrom(Vars.client.selfId).avatar!!.cdnUrl.toUrl()
+                            }
                         }
                     }
                     
@@ -245,11 +258,17 @@ object Commands{
                         embed{
                             val gui = it.first.getGuildOrNull()
                             val usrid = it.second.getOrNull(1)
-                        
+                            
+                            color = col
+                            
                             if(usrid != null){
                                 val usr = if(usrid.toULongOrNull() == null) it.first.author!! else userFrom(usrid.toULong().toSnowflake())
                                 title = "User"
                                 description = if(usr != null) uinfo(usr, gui) else "No user info! Did you supply a proper user id?"
+                                
+                                thumbnail{
+                                    url = usr.avatar!!.cdnUrl.toUrl()
+                                }
                             }else{
                                 title = "???"
                                 description = "Unknown user!"
