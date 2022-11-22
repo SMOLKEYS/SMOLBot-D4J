@@ -283,6 +283,10 @@ object Commands{
                                         
                                         title = "User"
                                         description = uinfo(usr, gui)
+                                        
+                                        thumbnail{
+                                            url = usr.avatar!!.cdnUrl.toUrl()
+                                        }
                                     }
                                 }
                             }else{
