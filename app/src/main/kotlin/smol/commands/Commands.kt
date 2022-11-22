@@ -277,7 +277,7 @@ object Commands{
                                     it.first.mentionedUsers.collect{ ments.add(it) }
                                     
                                     if(ments.isEmpty()){
-                                        title = "No arguments provided!"
+                                        title = "Wrong/No arguments provided!"
                                     }else{
                                         val usr = ments.random()
                                         
