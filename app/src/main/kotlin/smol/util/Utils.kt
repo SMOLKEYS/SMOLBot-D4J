@@ -99,13 +99,15 @@ suspend fun uinfo(usr: User, guild: Guild?): String{
         emptyNewline()
         
         if(guild != null){
-            val ext = usr.asMember(guild.id)
-            appendNewline("Guild-specific Info (for this guild):")
-            if(ext.nickname != null) appendNewline("Nickname: ${ext.nickname!!}")
-            appendNewline("Join Date: ${ext.joinedAt}")
-            append("Roles: ")
-            ext.roles.collect{ append(it.mention + " ") }
-            appendNewline("")
+            val ext = usr.asMemberOrNull(guild.id)
+            if(ext != null){
+                appendNewline("Guild-specific Info (for this guild):")
+                if(ext.nickname != null) appendNewline("Nickname: ${ext.nickname!!}")
+                appendNewline("Join Date: ${ext.joinedAt}")
+                append("Roles: ")
+                ext.roles.collect{ append(it.mention + " ") }
+                appendNewline("")
+            }
         }
         
     }
