@@ -262,7 +262,8 @@ object Commands{
                             color = col
                             
                             if(usrid != null){
-                                val usr = if(usrid.toULongOrNull() == null) it.first.author!! else userFrom(usrid.toULong().toSnowflake())
+                                val usr = if(usrid.toULongOrNull() == null) null else userFrom(usrid.toULong().toSnowflake())
+                                
                                 title = "User"
                                 if(usr != null){
                                     description = uinfo(usr, gui) 
