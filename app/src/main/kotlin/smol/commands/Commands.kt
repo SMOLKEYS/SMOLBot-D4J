@@ -217,7 +217,7 @@ object Commands{
             }
         }
         
-        command("info", "[bot/you/user <id>]", "Gives information about either the bot, you, or a user id. Defaults to you."){
+        command("info", "[bot/you/user (<id>/<mention...>)]", "Gives information about either the bot, you, or a user id/mention. If multiple mentions are found, a random one is picked. Defaults to you."){
             it.first.reply{
                 val pred = when{
                     it.second.isEmpty() -> "you"
