@@ -249,7 +249,7 @@ object Commands{
                             color = col
                             
                             thumbnail{
-                                url = userFrom(Vars.client.selfId).avatar!!.cdnUrl.toUrl()
+                                url = userFrom(Vars.client.selfId)!!.avatar!!.cdnUrl.toUrl()
                             }
                         }
                     }
@@ -264,10 +264,14 @@ object Commands{
                             if(usrid != null){
                                 val usr = if(usrid.toULongOrNull() == null) it.first.author!! else userFrom(usrid.toULong().toSnowflake())
                                 title = "User"
-                                description = if(usr != null) uinfo(usr, gui) else "No user info! Did you supply a proper user id?"
-                                
-                                thumbnail{
-                                    url = usr.avatar!!.cdnUrl.toUrl()
+                                if(usr != null){
+                                    description = uinfo(usr, gui) 
+                                    
+                                    thumbnail{
+                                        url = usr.avatar!!.cdnUrl.toUrl()
+                                    }
+                                }else{
+                                    description = "No user info found from ${usrid!!}!"
                                 }
                             }else{
                                 title = "???"
