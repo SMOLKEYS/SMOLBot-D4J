@@ -95,7 +95,7 @@ suspend fun uinfo(usr: User, guild: Guild?): String{
     return buildString{
         appendNewline("Name/Tag: ${usr.tag}")
         appendNewline("Is Bot: ${usr.isBot}")
-        appendNewline("PFP Link: ${usr.avatar!!.cdnUrl.toUrl()}")
+        appendNewline(linkage("PFP Link", usr.avatar!!.cdnUrl.toUrl()))
         emptyNewline()
         
         if(guild != null){
