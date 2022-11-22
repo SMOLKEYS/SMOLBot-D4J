@@ -242,7 +242,19 @@ object Commands{
                     }
                     
                     "user" -> {
+                        embed{
+                            val gui = it.first.getGuild()
+                            val usrid = it.second.getOrNull(1)
                         
+                            if(usrid != null){
+                                val usr = if(usrid.toULongOrNull() == null) it.first.author!!.id else usrid.toULong().toSnowflake()
+                                title = "User"
+                                description = uinfo(gui.getUser(usr), gui.id)
+                            }else{
+                                title = "???"
+                                description = "Unknown user!"
+                            }
+                        }
                     }
                 }
             }
