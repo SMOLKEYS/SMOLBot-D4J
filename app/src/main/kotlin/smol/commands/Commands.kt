@@ -229,7 +229,7 @@ object Commands{
                         embed{
                             val usr = it.first.author!!
                             title = "${usr.tag}"
-                            description = uinfo(usr, it.first.getGuild().id)
+                            description = uinfo(usr, it.first.getGuild())
                             
                         }
                     }
@@ -243,13 +243,13 @@ object Commands{
                     
                     "user" -> {
                         embed{
-                            val gui = it.first.getGuild()
+                            val gui = it.first.getGuildOrNull()
                             val usrid = it.second.getOrNull(1)
                         
                             if(usrid != null){
-                                val usr = if(usrid.toULongOrNull() == null) it.first.author!!.id else usrid.toULong().toSnowflake()
+                                val usr = if(usrid.toULongOrNull() == null) it.first.author!! else userFrom(usrid.toULong().toSnowflake())
                                 title = "User"
-                                description = uinfo(gui.getMember(usr), gui.id)
+                                description = if(usr != null) uinfo(usr, gui) else "No user info! Did you supply a proper user id?"
                             }else{
                                 title = "???"
                                 description = "Unknown user!"

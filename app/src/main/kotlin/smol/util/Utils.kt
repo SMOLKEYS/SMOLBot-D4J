@@ -66,8 +66,11 @@ fun StringBuilder.appendNewline(obj: Any){
     this.append("$obj\n")
 }
 
-/** Enforces a string, limiting it to only 2000 characters and invalidating everyone/here pings. */
-fun String.enforce(sub: Int = 0) = this.take(2000 - sub).replace("@everyone", "@еveryone").replace("@here", "@hеrе")
+fun StringBuilder.emptyNewline() = this.append("\n")
+
+
+/** Enforces a string, limiting it to only 2000 (or 4000 if nitro is true) characters and invalidating everyone/here pings. */
+fun String.enforce(sub: Int = 0, nitro: Boolean = false) = this.take((if(nitro) 4000 else 2000) - sub).replace("@everyone", "@еveryone").replace("@here", "@hеrе")
 
 fun String.blockWrap(): String{
     return "```\n${this.enforce(8)}\n```"
@@ -78,21 +81,34 @@ inline fun launch(crossinline l: suspend CoroutineScope.() -> Unit) = smol.Vars.
 
 inline fun <R> async(crossinline l: suspend CoroutineScope.() -> R) = smol.Vars.client.async{ l() };
 
+
 fun colorRand(): Int = Mathf.random(1, 255)
 
 fun linkage(text: String, link: String) = "**[$text]($link)**"
 
+
 suspend fun uinfo(kord: Kord, guild: Snowflake) = uinfo(kord.editSelf{}, guild)
 
-suspend fun uinfo(usr: User, guild: Snowflake): String{
+suspend fun uinfo(usr: User, guild: Guild?): String{
     return buildString{
-        val ext = usr.asMember(guild)
         appendNewline("Name/Tag: ${usr.tag}")
-        if(ext.nickname != null) appendNewline("Nickname: ${ext.nickname!!}")
-        appendNewline("Join Date: ${ext.joinedAt}")
-        append("Roles: ")
-        ext.roles.collect{ append(it.mention + " ") }
-        appendNewline("")
         appendNewline("Is Bot: ${usr.isBot}")
+        if(usr.avatar != null) appendNewline("PFP Link: ${usr.avatar.cdnUrl}")
+        emptyNewline()
+        
+        if(guild != null){
+            val ext = usr.asMember(guild)
+            appendNewline("Guild-specific Info (for this guild):")
+            if(ext.nickname != null) appendNewline("Nickname: ${ext.nickname!!}")
+            appendNewline("Join Date: ${ext.joinedAt}")
+            append("Roles: ")
+            ext.roles.collect{ append(it.mention + " ") }
+            appendNewline("")
+        }
+        
     }
+}
+
+suspend fun userFrom(id: Snowflake): User?{
+    return Vars.client.unsafe.user(id).asUserOrNull()
 }
