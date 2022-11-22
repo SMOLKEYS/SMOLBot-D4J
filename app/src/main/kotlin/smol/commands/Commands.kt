@@ -271,21 +271,21 @@ object Commands{
                                         url = usr.avatar!!.cdnUrl.toUrl()
                                     }
                                 }else{
-                                    description = "No user info found from ${usrid!!}!"
+                                    val ments = mutableListOf<User>()
+                                    
+                                    it.first.mentionedUsers.collect{ ments.add(it) }
+                                    
+                                    if(ments.isEmpty()){
+                                        title = "No arguments provided!"
+                                    }else{
+                                        val usr = ments.random()
+                                        
+                                        title = "User"
+                                        description = uinfo(usr, gui)
+                                    }
                                 }
                             }else{
-                                val ments = mutableListOf<User>()
-                                
-                                it.first.mentionedUsers.collect{ ments.add(it) }
-                                
-                                if(ments.isEmpty()){
-                                    title = "No arguments provided!"
-                                }else{
-                                    val usr = ments.random()
-                                    
-                                    title = "User"
-                                    description = uinfo(usr, gui)
-                                }
+                                title = "No arguments provided!"
                             }
                         }
                     }
