@@ -87,13 +87,15 @@ fun colorRand(): Int = Mathf.random(1, 255)
 fun linkage(text: String, link: String) = "**[$text]($link)**"
 
 
-suspend fun uinfo(kord: Kord, guild: Snowflake) = uinfo(kord.editSelf{}, guild)
+suspend fun uinfo(kord: Kord, guild: Guild?): String{
+    return uinfo(kord.editSelf{}, guild)
+}
 
 suspend fun uinfo(usr: User, guild: Guild?): String{
     return buildString{
         appendNewline("Name/Tag: ${usr.tag}")
         appendNewline("Is Bot: ${usr.isBot}")
-        if(usr.avatar != null) appendNewline("PFP Link: ${usr.avatar.cdnUrl}")
+        appendNewline("PFP Link: ${usr.avatar!!.cdnUrl}")
         emptyNewline()
         
         if(guild != null){

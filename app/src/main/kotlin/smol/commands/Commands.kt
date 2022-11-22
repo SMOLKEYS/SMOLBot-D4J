@@ -229,7 +229,7 @@ object Commands{
                         embed{
                             val usr = it.first.author!!
                             title = "${usr.tag}"
-                            description = uinfo(usr, it.first.getGuild())
+                            description = uinfo(usr, it.first.getGuildOrNull())
                             
                         }
                     }
@@ -237,7 +237,7 @@ object Commands{
                     "bot" -> {
                         embed{
                             title = "SMOLBot"
-                            description = uinfo(Vars.client, it.first.getGuild().id)
+                            description = uinfo(Vars.client, it.first.getGuildOrNull())
                         }
                     }
                     
