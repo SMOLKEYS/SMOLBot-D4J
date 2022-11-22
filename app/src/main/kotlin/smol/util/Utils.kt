@@ -13,9 +13,9 @@ import dev.kord.rest.builder.message.create.*
 import kotlinx.coroutines.*
 
 suspend fun Kord.getTextChannel(id: Snowflake) = this.getChannel(id) as TextChannel
-suspend fun Kord.getNewsChannel(id: Snowflake) = this as NewsChannel
-suspend fun Kord.getMessageChannel(id: Snowflake) = this as MessageChannel
-suspend fun Kord.getVoiceChannel(id: Snowflake) = this as VoiceChannel
+suspend fun Kord.getNewsChannel(id: Snowflake) = this.getChannel(id) as NewsChannel
+suspend fun Kord.getMessageChannel(id: Snowflake) = this.getChannel(id) as MessageChannel
+suspend fun Kord.getVoiceChannel(id: Snowflake) = this.getChannel(id) as VoiceChannel
 
 fun Channel.toTextChannel() = this as TextChannel
 fun Channel.toNewsChannel() = this as NewsChannel
