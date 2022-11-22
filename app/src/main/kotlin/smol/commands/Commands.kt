@@ -274,8 +274,18 @@ object Commands{
                                     description = "No user info found from ${usrid!!}!"
                                 }
                             }else{
-                                title = "???"
-                                description = "Unknown user!"
+                                val ments = mutableListOf<User>()
+                                
+                                it.first.mentionedUsers.collect{ ments.add(it) }
+                                
+                                if(ments.isEmpty()){
+                                    title = "No arguments provided!"
+                                }else{
+                                    val usr = ments.random()
+                                    
+                                    title = "User"
+                                    description = uinfo(usr, gui)
+                                }
                             }
                         }
                     }
