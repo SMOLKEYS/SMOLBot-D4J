@@ -99,7 +99,7 @@ suspend fun uinfo(usr: User, guild: Guild?): String{
         emptyNewline()
         
         if(guild != null){
-            val ext = usr.asMember(guild)
+            val ext = usr.asMember(guild.id)
             appendNewline("Guild-specific Info (for this guild):")
             if(ext.nickname != null) appendNewline("Nickname: ${ext.nickname!!}")
             appendNewline("Join Date: ${ext.joinedAt}")
