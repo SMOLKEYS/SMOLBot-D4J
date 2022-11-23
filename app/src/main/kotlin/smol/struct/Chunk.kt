@@ -89,7 +89,7 @@ open class Chunk<T>(val size: Int){
         }
     }
     
-    fun random(): MutableList<T>{
+    fun randomChunk(): MutableList<T>{
         return holder.random()
     }
     
