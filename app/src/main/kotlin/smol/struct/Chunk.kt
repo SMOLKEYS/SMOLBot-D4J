@@ -34,7 +34,17 @@ open class Chunk<T>(val size: Int){
     
     /** Removes the specified chunk index, or the last created chunk if -1 is given as an argument. */
     fun remove(target: Int = -1): Chunk<T>{
-        holder.remove(holder[if(target != -1) target else (holder.size - 1)])
+        val removeTarget = holder[if(target != -1) target else (holder.size - 1)]
+        totalChunks--
+        totalElements -= removeTarget.size
+        
+        holder.remove(removeTarget)
+        
+        if(holder.isEmpty()){
+            holder.add(mutableListOf<T>())
+            totalChunks++
+        }
+        
         return this
     }
     
