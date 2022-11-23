@@ -18,7 +18,7 @@ object Vars{
     var epoch = 0L
     val superuser = 691650272166019164UL.toSnowflake()
     
-    val bruh = arrayOf("kordin' time", "balls", "kord", "smolkeys", "nothing")
+    val bruh = arrayOf("kordin' time", "balls", "kord", "smolkeys", "nothing", "SQUID GAMES")
     
     val chars = ('a'..'z') + ('0'..'9')
     

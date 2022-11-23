@@ -55,7 +55,7 @@ suspend fun main(vararg args: String){
     
     Vars.client.launch{
         while(true){
-            delay(1000 * 60 * 10L)
+            delay(1000 * 45L)
             Vars.client.editPresence{
                 watching(Vars.bruh.random())
             }
