@@ -56,18 +56,20 @@ open class Chunk<T>(val size: Int){
     
     /** Returns true if the specified chunk index contains the specified element. */
     fun chunkContains(target: Int, element: T): Boolean{
+        var b = false
         forEachElementOfChunk(target){
-            if(it == element) return@chunkContains true
+            if(it == element) b = true
         }
-        return false
+        return b
     }
     
     /** Returns true if any of the elements in all of the chunks matches the specified element. */
     fun contains(element: T): Boolean{
+        var b = false
         forEachElement{
-            if(it == element) return@contains true
+            if(it == element) b = true
         }
-        return false
+        return b
     }
     
     /** Iterates over each chunk. */
