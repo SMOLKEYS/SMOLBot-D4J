@@ -35,11 +35,12 @@ open class Chunk<T>(val size: Int){
     /** Removes the specified chunk index, or the last created chunk if -1 is given as an argument. */
     fun remove(target: Int = -1): Chunk<T>{
         holder.remove(holder[if(target != -1) target else (holder.size - 1)])
+        return this
     }
     
     /** Returns a copy of the holder of this chunk instance. Safely modifiable. */
     fun copyHolder(): MutableList<MutableList<T>>{
-        val copy = mutableListOf<MutableListOf<T>>()
+        val copy = mutableListOf<MutableList<T>>()
         
         forEachChunk{
             copy.add(it)
@@ -56,7 +57,7 @@ open class Chunk<T>(val size: Int){
     /** Returns true if the specified chunk index contains the specified element. */
     fun chunkContains(target: Int, element: T): Boolean{
         forEachElementOfChunk(target){
-            if(it == element) return true
+            if(it == element) return@chunkContains true
         }
         return false
     }
@@ -64,7 +65,7 @@ open class Chunk<T>(val size: Int){
     /** Returns true if any of the elements in all of the chunks matches the specified element. */
     fun contains(element: T): Boolean{
         forEachElement{
-            if(it == element) return true
+            if(it == element) return@contains true
         }
         return false
     }
