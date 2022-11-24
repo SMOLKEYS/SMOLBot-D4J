@@ -10,6 +10,7 @@ import dev.kord.core.entity.channel.*
 import dev.kord.core.behavior.*
 import dev.kord.core.behavior.channel.*
 import dev.kord.rest.builder.message.create.*
+import java.util.*
 import kotlinx.coroutines.*
 
 suspend fun Kord.getTextChannel(id: Snowflake) = this.getChannel(id) as TextChannel
@@ -101,9 +102,9 @@ suspend fun uinfo(usr: User, guild: Guild?): String{
         if(guild != null){
             val ext = usr.asMemberOrNull(guild.id)
             if(ext != null){
-                appendNewline("Guild-specific Info (for this guild):")
+                appendNewline("**Guild-specific Info**")
                 if(ext.nickname != null) appendNewline("Nickname: ${ext.nickname!!}")
-                appendNewline("Join Date: ${ext.joinedAt}")
+                appendNewline("Join Date: ${Date(ext.joinedAt.toEpochMilliseconds())}")
                 append("Roles: ")
                 ext.roles.collect{ append(it.mention + " ") }
                 appendNewline("")
