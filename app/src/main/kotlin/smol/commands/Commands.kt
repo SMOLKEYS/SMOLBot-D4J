@@ -295,7 +295,7 @@ object Commands{
                                         title = if(ments.size == 1) "User" else "Users"
                                         description = buildString{
                                             ments.forEach{
-                                                appendNewline(uinfo(usr, gui))
+                                                appendNewline(uinfo(it, gui))
                                             }
                                         }
                                         
