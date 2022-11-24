@@ -11,6 +11,7 @@ import dev.kord.core.behavior.*
 import dev.kord.core.behavior.channel.*
 import dev.kord.rest.builder.message.create.*
 import java.util.*
+import kotlin.time.*
 import kotlinx.coroutines.*
 
 suspend fun Kord.getTextChannel(id: Snowflake) = this.getChannel(id) as TextChannel
@@ -96,6 +97,7 @@ suspend fun uinfo(usr: User, guild: Guild?): String{
     return buildString{
         appendNewline("Name/Tag: ${usr.tag}")
         appendNewline("Is Bot: ${usr.isBot}")
+        appendNewline("Discord Join Date: ${Date(usr.id.timeMark.elapsedNow().toLong(DurationUnit.MILLISECONDS))}")
         appendNewline(linkage("PFP Link", usr.avatar!!.cdnUrl.toUrl()))
         emptyNewline()
         
@@ -104,6 +106,7 @@ suspend fun uinfo(usr: User, guild: Guild?): String{
             if(ext != null){
                 appendNewline("**Guild-specific Info**")
                 if(ext.nickname != null) appendNewline("Nickname: ${ext.nickname!!}")
+                appendNewline("Server Owner: ${ext.isOwner()}")
                 appendNewline("Join Date: ${Date(ext.joinedAt.toEpochMilliseconds())}")
                 append("Roles: ")
                 ext.roles.collect{ append(it.mention + " ") }
