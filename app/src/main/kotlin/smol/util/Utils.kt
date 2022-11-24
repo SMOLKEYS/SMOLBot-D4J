@@ -98,7 +98,7 @@ suspend fun uinfo(usr: User, guild: Guild?): String{
     return buildString{
         appendNewline("Name/Tag: ${usr.tag}")
         appendNewline("Is Bot: ${usr.isBot}")
-        appendNewline("Discord Join Date: ${Date(usr.id.timeMark.elapsedNow().toLong(DurationUnit.MILLISECONDS))}")
+        appendNewline("Discord Join Date: ${Date(usr.id.timestamp.toEpochMilliseconds())}")
         appendNewline(linkage("PFP Link", usr.avatar!!.cdnUrl.toUrl()))
         emptyNewline()
         
