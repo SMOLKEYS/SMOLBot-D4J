@@ -274,8 +274,9 @@ object Commands{
                                                 val rs = if(it.toULongOrNull() == null) userFrom(Vars.client.selfId) else userFrom(it.toULong().toSnowflake())
                                                 
                                                 if(rs != null) appendNewline(uinfo(rs, gui))
+                                                appendNewline("---")
                                             }
-                                        }
+                                        }.enforce(nitro = true)
                                     }else{
                                         description = uinfo(usr, gui)
                                         
@@ -296,8 +297,9 @@ object Commands{
                                         description = buildString{
                                             ments.forEach{
                                                 appendNewline(uinfo(it, gui))
+                                                appendNewline("---")
                                             }
-                                        }
+                                        }.enforce(nitro = true)
                                         
                                         if(ments.size == 1){
                                             thumbnail{
