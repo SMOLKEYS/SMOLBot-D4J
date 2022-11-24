@@ -265,7 +265,7 @@ object Commands{
                             if(usrid != null){
                                 val usr = if(usrid.toULongOrNull() == null) null else userFrom(usrid.toULong().toSnowflake())
                                 
-                                title = if(usrs != null && usrs.size != 0) "User(s)"
+                                title = if(usrs != null && usrs.size != 0) "User(s)" else "???"
                                 
                                 if(usr != null){
                                     if(usrs != null && usrs.size != 0){
@@ -273,7 +273,7 @@ object Commands{
                                             usrs.forEach{
                                                 val rs = if(it.toULongOrNull() == null) userFrom(Vars.client.selfId) else userFrom(it.toULong().toSnowflake())
                                                 
-                                                appendNewline(uinfo(rs, gui))
+                                                if(rs != null) appendNewline(uinfo(rs, gui))
                                             }
                                         }
                                     }else{
