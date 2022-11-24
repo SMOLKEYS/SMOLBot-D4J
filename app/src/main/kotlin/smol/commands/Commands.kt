@@ -258,18 +258,30 @@ object Commands{
                         embed{
                             val gui = it.first.getGuildOrNull()
                             val usrid = it.second.getOrNull(1)
+                            val usrs = it.second.copyWithoutFirstElementOrNull()
                             
                             color = col
                             
                             if(usrid != null){
                                 val usr = if(usrid.toULongOrNull() == null) null else userFrom(usrid.toULong().toSnowflake())
                                 
-                                title = "User"
+                                title = if(usrs != null && usrs.size != 0) "User(s)"
+                                
                                 if(usr != null){
-                                    description = uinfo(usr, gui) 
-                                    
-                                    thumbnail{
-                                        url = usr.avatar!!.cdnUrl.toUrl()
+                                    if(usrs != null && usrs.size != 0){
+                                        description = buildString{
+                                            usrs.forEach{
+                                                val rs = if(it.toULongOrNull() == null) userFrom(Vars.client.selfId) else userFrom(it.toULong().toSnowflake())
+                                                
+                                                appendNewline(uinfo(rs, gui))
+                                            }
+                                        }
+                                    }else{
+                                        description = uinfo(usr, gui)
+                                        
+                                        thumbnail{
+                                            url = usr.avatar!!.cdnUrl.toUrl()
+                                        }
                                     }
                                 }else{
                                     val ments = mutableListOf<User>()
@@ -279,13 +291,18 @@ object Commands{
                                     if(ments.isEmpty()){
                                         title = "Wrong/No arguments provided!"
                                     }else{
-                                        val usr = ments.random()
                                         
-                                        title = "User"
-                                        description = uinfo(usr, gui)
+                                        title = if(ments.size == 1) "User" else "Users"
+                                        description = buildString{
+                                            ments.forEach{
+                                                appendNewline(uinfo(usr, gui))
+                                            }
+                                        }
                                         
-                                        thumbnail{
-                                            url = usr.avatar!!.cdnUrl.toUrl()
+                                        if(ments.size == 1){
+                                            thumbnail{
+                                                url = ments[0].avatar!!.cdnUrl.toUrl()
+                                            }
                                         }
                                     }
                                 }

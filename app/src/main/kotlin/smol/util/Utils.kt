@@ -58,10 +58,26 @@ inline fun <reified T> Array<T>.copyWithoutFirstElement(): Array<T>{
     return dest as Array<T>
 }
 
+inline fun <reified T> Array<T>.copyWithoutFirstElementOrNull(): Array<T>?{
+    try{
+        return this.copyWithoutFirstElement()
+    }catch(e: Exception){
+        return null
+    }
+}
+
 inline fun <reified T> Array<T>.copyWithoutFirstElements(n: Int): Array<T>{
     var dest = arrayOfNulls<T>(this.size - n)
     System.arraycopy(this, n, dest, 0, dest.size)
     return dest as Array<T>
+}
+
+inline fun <reified T> Array<T>.copyWithoutFirstElementsOrNull(n: Int): Array<T>?{
+    try{
+        return this.copyWithoutFirstElements(n)
+    }catch(e: Exception){
+        return null
+    }
 }
 
 fun StringBuilder.appendNewline(obj: Any){
@@ -96,6 +112,8 @@ suspend fun uinfo(kord: Kord, guild: Guild?): String{
 @OptIn(ExperimentalTime::class)
 suspend fun uinfo(usr: User, guild: Guild?): String{
     return buildString{
+        appendNewline("**User Info**")
+        emptyNewline()
         appendNewline("Name/Tag: ${usr.tag}")
         appendNewline("Is Bot: ${usr.isBot}")
         appendNewline("Discord Join Date: ${Date(usr.id.timestamp.toEpochMilliseconds())}")
