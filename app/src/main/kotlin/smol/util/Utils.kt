@@ -93,6 +93,7 @@ suspend fun uinfo(kord: Kord, guild: Guild?): String{
     return uinfo(userFrom(kord.selfId)!!, guild)
 }
 
+@OptIn(ExperimentalTime::class)
 suspend fun uinfo(usr: User, guild: Guild?): String{
     return buildString{
         appendNewline("Name/Tag: ${usr.tag}")
