@@ -12,6 +12,7 @@ import dev.kord.core.behavior.*
 import dev.kord.core.behavior.channel.*
 import dev.kord.rest.builder.message.*
 import dev.kord.rest.builder.message.create.*
+import dev.kord.rest.builder.interaction.*
 import dev.kord.common.*
 import javax.script.*
 import kotlinx.coroutines.*

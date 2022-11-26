@@ -10,6 +10,7 @@ import kotlinx.coroutines.*
 import arc.math.*
 import dev.kord.core.*
 import dev.kord.core.event.message.*
+import dev.kord.core.event.interaction.*
 import dev.kord.core.entity.channel.*
 import dev.kord.core.behavior.channel.*
 import dev.kord.rest.builder.message.create.*

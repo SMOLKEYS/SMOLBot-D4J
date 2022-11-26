@@ -24,11 +24,10 @@ object Vars{
     
     val links = mutableListOf(
         EmbedBuilder.Field().apply{
-            value = linkage("Invite Bot", "https://discord.com/oauth2/authorize?client_id=946790508737491004&permissions=2147483647&scope=bot")
-            
-        },
-        EmbedBuilder.Field().apply{
-            value = linkage("SmolBot CentCom Invite", "https://discord.gg/8syZQdqhwy")
+            value = buildString{
+                appendNewline(linkage("Invite Bot", "https://discord.com/oauth2/authorize?client_id=946790508737491004&permissions=2147483647&scope=bot"))
+                appendNewline(linkage("SmolBot CentCom Invite", "https://discord.gg/8syZQdqhwy"))
+            }
         }
     )
     
