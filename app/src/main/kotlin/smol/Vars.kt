@@ -22,6 +22,7 @@ object Vars{
     val bruh = arrayOf("kordin' time", "balls", "kord", "smolkeys", "nothing", "SQUID GAMES")
     
     val chars = ('a'..'z') + ('0'..'9')
+    val profileRange = (1..4)
     
     val links = mutableListOf(
         EmbedBuilder.Field().apply{

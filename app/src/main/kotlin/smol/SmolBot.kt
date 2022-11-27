@@ -5,6 +5,7 @@ import smol.util.*
 import smol.console.*
 import smol.commands.*
 import java.util.*
+import javax.imageio.*
 import kotlin.concurrent.*
 import kotlinx.coroutines.*
 import arc.math.*
@@ -71,6 +72,15 @@ suspend fun main(vararg args: String){
                 Vars.statusReportChannel.createMessage("Bot instance with older epoch detected. Terminating newer one...")
                 
                 Vars.client.shutdown()
+            }
+        }
+    }
+    
+    Vars.client.launch{
+        while(true){
+            delay(1000 * 60 * 10L)
+            Vars.client.editSelf{
+                avatar = ImageIO.read(Vars.resource("/profiles/pfp${Vars.profileRange.random()}.png")).toKordImage()
             }
         }
     }
