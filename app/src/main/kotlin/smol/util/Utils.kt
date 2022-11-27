@@ -10,7 +10,9 @@ import dev.kord.core.entity.channel.*
 import dev.kord.core.behavior.*
 import dev.kord.core.behavior.channel.*
 import dev.kord.rest.builder.message.create.*
+import java.awt.*
 import java.util.*
+import javax.imageio.*
 import kotlin.time.*
 import kotlinx.coroutines.*
 
@@ -138,4 +140,12 @@ suspend fun uinfo(usr: User, guild: Guild?): String{
 
 suspend fun userFrom(id: Snowflake): User?{
     return Vars.client.unsafe.user(id).asUserOrNull()
+}
+
+fun BufferedImage.toKordImage(): dev.kord.rest.Image{
+    val byteStream = ByteArrayOutputStream()
+    ImageIO.write(this, "png", byteStream)
+    val result = byteStream.toByteArray()
+    
+    return dev.kord.rest.Image.raw(result, dev.kord.rest.Image.Format.fromContentType("image/png"))
 }

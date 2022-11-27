@@ -6,6 +6,7 @@ import dev.kord.core.*
 import dev.kord.common.entity.*
 import dev.kord.core.entity.channel.*
 import dev.kord.rest.builder.message.*
+import java.net.*
 import javax.script.*
 
 object Vars{
@@ -47,5 +48,9 @@ object Vars{
 			.map { it.name.substringBeforeLast('.') + ".*" }
 			.distinct()
 			.joinToString(";") { "import $it" }
+	}
+	
+	fun resource(path: String): URL?{
+	    return {}::class.java.getResource(path)
 	}
 }
