@@ -10,7 +10,7 @@ import dev.kord.core.entity.channel.*
 import dev.kord.core.behavior.*
 import dev.kord.core.behavior.channel.*
 import dev.kord.rest.builder.message.create.*
-import java.awt.*
+import java.awt.image.*
 import java.util.*
 import javax.imageio.*
 import kotlin.time.*
