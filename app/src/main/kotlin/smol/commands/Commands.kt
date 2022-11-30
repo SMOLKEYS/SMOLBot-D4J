@@ -331,7 +331,7 @@ object Commands{
                     val health = if(third != null && third.toIntOrNull() != null) third.toInt() else 2500
                     
                     Vars.battle.begin(first, second, health).forEach{
-                        delay(60 * 2L)
+                        delay(1000 * 2L)
                         ms.edit{ content = it }
                     }
                 }else{
