@@ -317,6 +317,28 @@ object Commands{
                 }
             }
         }
+        
+        command("battle", "<any...> <any...> [int]", "Starts a battle between two players."){
+            val ms = it.first.channel.createMessage("Battle!")
+            if(it.second.isEmpty()){
+                ms.edit{ content = "No arguments supplied!" }
+            }else{
+                val first = it.second[0]
+                val second = it.second.getOrNull(1)
+                val third = it.second.getOrNull(2)
+                
+                if(second != null){
+                    val health = if(third != null && third.toIntOrNull() != null) third.toInt() else 2500
+                    
+                    Vars.battle.begin(first, second, health).forEach{
+                        delay(60 * 2L)
+                        ms.edit{ content = it }
+                    }
+                }else{
+                    ms.edit{ content = "Second argument expected!" }
+                }
+            }
+        }
     }
     
     fun afterLoad(){
