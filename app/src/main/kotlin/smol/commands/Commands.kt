@@ -333,9 +333,9 @@ object Commands{
                     Vars.battle.begin(first, second, if(health > 15000) 15000 else health).forEach{
                         delay(1000 * 2L)
                         ms.edit{
-                            val upcoming = "${ms.fetchMessage().content}\n$it"
+                            val upcoming = "${ms.fetchMessage().content}\n$it\n---"
                             
-                            content = if(upcoming.length > 355) upcoming.substring(upcoming.length - 355) else upcoming
+                            content = if(upcoming.length > 425) upcoming.substring(upcoming.length - 425) else upcoming
                         }
                     }
                 }else{
