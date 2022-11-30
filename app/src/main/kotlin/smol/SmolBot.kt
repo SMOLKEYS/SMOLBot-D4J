@@ -43,6 +43,8 @@ suspend fun main(vararg args: String){
         Commands.afterLoad()
     }
     
+    Vars.load()
+    
     Timer(true).schedule(1000 * 60 * 60 * 6L){
         Vars.client.launch{
             Printings.info("This instance is shutting down.")
