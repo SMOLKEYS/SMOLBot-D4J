@@ -332,7 +332,11 @@ object Commands{
                     
                     Vars.battle.begin(first, second, if(health > 15000) 15000 else health).forEach{
                         delay(1000 * 2L)
-                        ms.edit{ content = it }
+                        ms.edit{
+                            val upcoming = "$contebt\n$it"
+                            
+                            content = if(upcoming.length > 355) upcoming.substring(upcoming.length - 355) else upcoming
+                        }
                     }
                 }else{
                     ms.edit{ content = "Second argument expected!" }
