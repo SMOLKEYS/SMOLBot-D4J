@@ -66,10 +66,5 @@ object Vars{
 	    CombatCommand.addWeapon("{0} burned {1} with a torch!", 9..18)
 	    CombatCommand.addWeapon("{0} swung a bat onto {1}'s head!", 15..25)
 	    CombatCommand.addWeapon("{0} bombed {1}!", 25..45)
-	   
-	    CombatCommand.addHealing("{0} rested.", 0..3)
-	    CombatCommand.addHealing("{0} used a bandage!", 1..5)
-	    CombatCommand.addHealing("{0} used a health potion!", 2..20)
-	    CombatCommand.addHealing("{0} used a HEALTHCAST!", 10..35)
 	}
 }
