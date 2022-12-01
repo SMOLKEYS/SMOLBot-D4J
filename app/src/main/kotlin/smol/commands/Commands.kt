@@ -328,9 +328,9 @@ object Commands{
                 val third = it.second.getOrNull(2)
                 
                 if(second != null){
-                    val health = if(third != null && third.toIntOrNull() != null) third.toInt() else 2500
+                    val health = if(third != null && third.toIntOrNull() != null) third.toInt() else 250
                     
-                    Vars.battle.begin(first, second, if(health > 15000) 15000 else health).forEach{
+                    Vars.battle.begin(first, second, if(health > 450) 450 else health).forEach{
                         delay(1000 * 2L)
                         ms.edit{
                             val upcoming = "${ms.fetchMessage().content}\n$it\n---".enforce()

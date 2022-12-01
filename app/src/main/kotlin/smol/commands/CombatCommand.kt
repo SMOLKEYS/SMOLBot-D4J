@@ -29,7 +29,7 @@ open class CombatCommand{
 
         while(u0.second > 0 && u1.second > 0){
             val weapon = pairs.random()
-            val finalDamage = weapon.second.random()
+            val finalDamage = if(weapon.first.contains("Healing!")) -weapon.second.random() else weapon.second.random()
 
             opposition().second -= finalDamage
             attacks++
@@ -50,7 +50,7 @@ open class CombatCommand{
     fun formSentence(attacker: String, target: String, choicer: String, damage: Int): String{
         return buildString{
             append(choicer.replace("{0}", attacker).replace("{1}", target) + " ")
-            append("$damage damage!")
+            append(if(damage < 0) "$damage health restored!" else "$damage damage!")
         }
     }
 
@@ -59,6 +59,10 @@ open class CombatCommand{
 
         fun addWeapon(text: String, damage: IntRange){
             pairs.add(text to damage)
+        }
+        
+        fun addHealing(text: String, health: IntRange){
+            pairs.add("Healing! $text" to health)
         }
     }
 }

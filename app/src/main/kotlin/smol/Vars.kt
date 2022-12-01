@@ -60,14 +60,16 @@ object Vars{
 	}
 	
 	fun load(){
-	    CombatCommand.addWeapon("{0} punched {1}!", 1..3)
-	    CombatCommand.addWeapon("Lightning called down by {0} hit {1}!", 40..100)
-	    CombatCommand.addWeapon("Fist storm from {0}! All fists landed on {1}!", 10..60)
-	    CombatCommand.addWeapon("{0} sent burning coal to {1}!", 15..20)
-	    CombatCommand.addWeapon("{0} kicked {1}!", 4..9)
-	    CombatCommand.addWeapon("Storming flames!\n{0} called a firestorm onto {1}!", 300..550)
-	    CombatCommand.addWeapon("{0} dropped a piano onto {1}!", 150..650)
-	    CombatCommand.addWeapon("{0} became based! {1} couldn't handle it and lost a lot of health!", 250..1000)
-	    CombatCommand.addWeapon("{0}, {0}! YOU'VE MADE A DEAL WITH ME, ME!\n{1} was hit by a scythe!", 860..870)
+	    CombatCommand.addWeapon("{0} punched {1}!", 1..7)
+	    CombatCommand.addWeapon("{0} kicked {1}!", 3..10)
+	    CombatCommand.addWeapon("{0} slashed a knife onto {1}!", 7..15)
+	    CombatCommand.addWeapon("{0} burned {1} with a torch!", 9..18)
+	    CombatCommand.addWeapon("{0} swung a bat onto {1}'s head!", 15..25)
+	    CombatCommand.addWeapon("{0} bombed {1}!", 25..45)
+	   
+	    CombatCommand.addHealing("{0} rested.", 0..3)
+	    CombatCommand.addHealing("{0} used a bandage!", 1..5)
+	    CombatCommand.addHealing("{0} used a health potion!", 2..20)
+	    CombatCommand.addHealing("{0} used a HEALTHCAST!", 10..35)
 	}
 }
