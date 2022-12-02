@@ -11,7 +11,9 @@ open class CombatCommand{
     private var u0 = MutablePair<String, Int>("pl", 100)
     private var u1 = MutablePair<String, Int>("pl1", 100)
     private var attacks = 0
-
+    
+    var occupied = false
+    
     fun preposition(): MutablePair<String, Int>{
         return if(attacks % 2 == 0) u1 else u0
     }

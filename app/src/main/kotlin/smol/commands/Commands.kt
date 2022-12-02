@@ -322,13 +322,15 @@ object Commands{
             val ms = it.first.channel.createMessage("Battle!")
             if(it.second.isEmpty()){
                 ms.edit{ content = "No arguments supplied!" }
-            }else{
+            }else if(!Vars.battle.occupied){
                 val first = it.second[0]
                 val second = it.second.getOrNull(1)
                 val third = it.second.getOrNull(2)
                 
                 if(second != null){
                     val health = if(third != null && third.toIntOrNull() != null) third.toInt() else 250
+                    
+                    Vars.battle.occupied = true
                     
                     Vars.battle.begin(first, second, if(health > 450) 450 else health).forEach{
                         delay(1000 * 2L)
@@ -338,9 +340,13 @@ object Commands{
                             content = if(upcoming.length > 425) upcoming.substring(upcoming.length - 425) else upcoming
                         }
                     }
+                    
+                    Vars.battle.occupied = false
                 }else{
                     ms.edit{ content = "Second argument expected!" }
                 }
+            }else{
+                ms.edit{ content = "FAILURE: A battle is currently active!" }
             }
         }
     }
