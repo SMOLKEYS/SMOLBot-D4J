@@ -112,7 +112,7 @@ object Commands{
             val res = try{
                 if(it.first.author!!.id != Vars.superuser) throw Throwable("You cannot run this command.")
                 
-                Vars.scriptEngine.eval("$script", Vars.scriptContext).let{
+                Vars.scriptEngine.eval("${Vars.defaultImports}\n$script", Vars.scriptContext).let{
                     when(it){
                         is Deferred<*> -> it.await()
                         is Job -> it.join()
@@ -141,7 +141,7 @@ object Commands{
             val res = try{
                 if(it.first.author!!.id != Vars.superuser) throw Throwable("You cannot run this command.")
                 
-                Vars.jsScriptEngine.eval("${Vars.defaultImports}\n$script", Vars.jsScriptContext).let{
+                Vars.jsScriptEngine.eval("$script", Vars.jsScriptContext).let{
                     when(it){
                         is Deferred<*> -> it.await()
                         is Job -> it.join()
