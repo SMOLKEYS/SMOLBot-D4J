@@ -47,50 +47,38 @@ object Vars{
     
     lateinit var jsScriptEngine: RhinoEngine
     
-	val defaultImports by lazy{
-		ClassLoader::class.java.getDeclaredField("classes")
-			.let {
-				it.isAccessible = true
-				it.get(Vars::class.java.classLoader) as Vector<Class<*>>
-			}
-			.filter { "internal" !in it.name && "$" !in it.name }
-			.map { it.name.substringBeforeLast('.') + ".*" }
-			.distinct()
-			.joinToString(";") { "import $it" }
-	}
-	
-	fun resource(path: String): URL?{
-	    return {}::class.java.getResource(path)
-	}
-	
-	fun resourceAsString(path: String): String?{
-	    try{
-	        return String({}::class.java.getResourceAsStream(path).readAllBytes())
-	    }catch(e: Exception){
-	        return null
-	    }
-	}
-	
-	fun load(){
-	    CombatCommand.addWeapon("{0} punched {1}!", 1..7)
-	    CombatCommand.addWeapon("{0} kicked {1}!", 3..10)
-	    CombatCommand.addWeapon("{0} slashed a knife onto {1}!", 7..15)
-	    CombatCommand.addWeapon("{0} burned {1} with a torch!", 9..18)
-	    CombatCommand.addWeapon("{0} swung a bat onto {1}'s head!", 15..25)
-	    CombatCommand.addWeapon("{0} bombed {1}!", 25..45)
-	    
-	    val tt = Thread{
-	        jsScriptEngine = RhinoEngine().apply{
-	            context = Context.enter()
-	            scope = ImporterTopLevel(context)
-	        }
-	        
-	        jsScriptEngine.context.initStandardObjects()
-	        
-	        jsScriptEngine.eval(resourceAsString("/scripts/global.js")!!)
-	    }
-	    
-	    tt.start()
-	    
-	}
+    val defaultImports by lazy{
+        ClassLoader::class.java.getDeclaredField("classes")
+            .let {
+                it.isAccessible = true
+                it.get(Vars::class.java.classLoader) as Vector<Class<*>>
+            }
+            .filter { "internal" !in it.name && "$" !in it.name }
+            .map { it.name.substringBeforeLast('.') + ".*" }
+            .distinct()
+            .joinToString(";") { "import $it" }
+    }
+    
+    fun resource(path: String): URL?{
+        return {}::class.java.getResource(path)
+    }
+    
+    fun resourceAsString(path: String): String?{
+        try{
+            return String({}::class.java.getResourceAsStream(path).readAllBytes())
+        }catch(e: Exception){
+            return null
+        }
+    }
+    
+    fun load(){
+        CombatCommand.addWeapon("{0} punched {1}!", 1..7)
+        CombatCommand.addWeapon("{0} kicked {1}!", 3..10)
+        CombatCommand.addWeapon("{0} slashed a knife onto {1}!", 7..15)
+        CombatCommand.addWeapon("{0} burned {1} with a torch!", 9..18)
+        CombatCommand.addWeapon("{0} swung a bat onto {1}'s head!", 15..25)
+        CombatCommand.addWeapon("{0} bombed {1}!", 25..45)
+        
+        jsScriptEngine.eval(resourceAsString("/scripts/global.js")!!)
+    }
 }
