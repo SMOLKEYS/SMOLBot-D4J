@@ -132,28 +132,10 @@ object Commands{
         command("jval", "<script>", "Evaluates `js` code. Extremely dangerous. Superuser only."){
             val script = it.first.content.substring(8)
             
-            Vars.jsScriptEngine.put("message", it.first)
-            Vars.jsScriptContext.setAttribute("message", it.first, ScriptContext.ENGINE_SCOPE)
+            Vars.jsScriptEngine.addGlobalProperty("message", it.first)
+            Vars.jsScriptEngine.addGlobalProperty("args", it.second)
             
-            Vars.jsScriptEngine.put("args", it.second)
-            Vars.jsScriptContext.setAttribute("args", it.second, ScriptContext.ENGINE_SCOPE)
-            
-            val res = try{
-                if(it.first.author!!.id != Vars.superuser) throw Throwable("You cannot run this command.")
-                
-                Vars.jsScriptEngine.eval("$script", Vars.jsScriptContext).let{
-                    when(it){
-                        is Deferred<*> -> it.await()
-                        is Job -> it.join()
-                        else -> it
-                    }
-                }
-                
-            }catch(e: Throwable){
-                (e.cause ?: e).let{
-                    it.toString()
-                }
-            }
+            val res = Vars.jsScriptEngine.eval(script)
             
             it.first.reply("$res".blockWrap())
         }
