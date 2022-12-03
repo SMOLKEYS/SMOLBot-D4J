@@ -78,6 +78,6 @@ object Vars{
 	    CombatCommand.addWeapon("{0} swung a bat onto {1}'s head!", 15..25)
 	    CombatCommand.addWeapon("{0} bombed {1}!", 25..45)
 	    
-	    jsScriptEngine.eval(resourceAsString("/scripts/global.js"))
+	    jsScriptEngine.eval(resourceAsString("/scripts/global.js")!!)
 	}
 }

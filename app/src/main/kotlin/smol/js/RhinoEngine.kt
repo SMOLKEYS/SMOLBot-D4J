@@ -19,7 +19,7 @@ open class RhinoEngine(){
         context.initStandardObjects()
     }
     
-    fun eval(scr: String): String{
+    fun eval(scr: String): String?{
         var res: String? = null
         
         try{
