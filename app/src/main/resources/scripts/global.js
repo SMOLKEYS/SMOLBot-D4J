@@ -56,3 +56,8 @@ function extend( /*Base, ..., def*/ ) {
     return instance
 }
 
+//accessors for singletons
+const Vars = Packages.smol.Vars.INSTANCE
+const Printings = Packages.smol.console.Printings.INSTANCE
+const Args = Packages.smol.commands.Args.INSTANCE
+const Commands = Packages.smol.commands.Commands.INSTANCE
