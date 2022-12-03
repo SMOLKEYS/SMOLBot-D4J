@@ -1,2 +1,2 @@
 //context association is strange.
-Vars.jsScriptEngine = RhinoEngine()
+smol.Vars.jsScriptEngine = smol.js.RhinoEngine()
