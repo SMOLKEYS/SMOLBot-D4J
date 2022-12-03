@@ -150,11 +150,14 @@ open class Chunk<T>(val size: Int){
         return this
     }
     
+    fun shuffleElements(): Chunk<T>{
+        holder.forEach{ it.shuffle() }
+        return this
+    }
+    
     fun shuffle(): Chunk<T>{
         holder.shuffle()
-        holder.forEach{
-            it.shuffle()
-        }
+        holder.forEach{ it.shuffle() }
         
         return this
     }
