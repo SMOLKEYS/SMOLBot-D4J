@@ -80,10 +80,11 @@ object Vars{
 	    
 	    val tt = Thread{
 	        jsScriptEngine = RhinoEngine()
+	        
+	        jsScriptEngine.eval(resourceAsString("/scripts/global.js")!!)
 	    }
 	    
 	    tt.start()
 	    
-	    jsScriptEngine.eval(resourceAsString("/scripts/global.js")!!)
 	}
 }
