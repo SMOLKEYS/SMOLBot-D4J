@@ -43,6 +43,12 @@ object Vars{
     
     val scriptContext = SimpleScriptContext()
     
+    val jsScriptEngine by lazy{
+        ScriptEngineManager(Thread.currentThread().contextClassLoader).getEngineByExtension("js")!!
+    }
+    
+    val jsScriptContext = SimpleScriptContext()
+    
 	val defaultImports by lazy{
 		ClassLoader::class.java.getDeclaredField("classes")
 			.let {

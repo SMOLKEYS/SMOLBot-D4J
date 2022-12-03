@@ -112,7 +112,7 @@ object Commands{
             val res = try{
                 if(it.first.author!!.id != Vars.superuser) throw Throwable("You cannot run this command.")
                 
-                Vars.scriptEngine.eval("${Vars.defaultImports}\n$script", Vars.scriptContext).let{
+                Vars.scriptEngine.eval("$script", Vars.scriptContext).let{
                     when(it){
                         is Deferred<*> -> it.await()
                         is Job -> it.join()
@@ -129,7 +129,36 @@ object Commands{
             it.first.reply("$res".blockWrap())
         }
         
-        //cleanup todo
+        command("jval", "<script>", "Evaluates `js` code. Extremely dangerous. Superuser only."){
+            val script = it.first.content.substring(8)
+            
+            Vars.jsScriptEngine.put("message", it.first)
+            Vars.jsScriptContext.setAttribute("message", it.first, ScriptContext.ENGINE_SCOPE)
+            
+            Vars.jsScriptEngine.put("args", it.second)
+            Vars.jsScriptContext.setAttribute("args", it.second, ScriptContext.ENGINE_SCOPE)
+            
+            val res = try{
+                if(it.first.author!!.id != Vars.superuser) throw Throwable("You cannot run this command.")
+                
+                Vars.jsScriptEngine.eval("${Vars.defaultImports}\n$script", Vars.jsScriptContext).let{
+                    when(it){
+                        is Deferred<*> -> it.await()
+                        is Job -> it.join()
+                        else -> it
+                    }
+                }
+                
+            }catch(e: Throwable){
+                (e.cause ?: e).let{
+                    it.toString()
+                }
+            }
+            
+            it.first.reply("$res".blockWrap())
+        }
+        
+        
         command("logout", "<string>", "Shuts down a bot instance with the specified ubid. Superuser only."){
             it.first.reply(buildString{
                 when(it.first.author!!.id){
