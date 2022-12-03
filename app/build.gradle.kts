@@ -30,7 +30,7 @@ dependencies{
     implementation("com.google.code.gson:gson:2.10")
     
     //wheeee
-    implementation("com.github.mozilla:rhino:0131b5c7e4")
+    implementation("com.github.Anuken:rhino:73a812444ac388ac2d94013b5cadc8f70b7ea027")
 }
 
 
