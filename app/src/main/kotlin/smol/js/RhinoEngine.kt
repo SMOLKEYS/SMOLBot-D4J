@@ -9,14 +9,10 @@ import java.net.*
 import java.util.regex.*
 
 open class RhinoEngine(){
-    var context: Context
-    var scope: Scriptable
+    lateinit var context: Context
+    lateinit var scope: Scriptable
     
     init{
-        context = getScriptContext()
-        scope = ImporterTopLevel(context)
-        
-        context.initStandardObjects()
     }
     
     fun eval(scr: String): String?{

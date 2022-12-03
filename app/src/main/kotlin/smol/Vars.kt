@@ -10,6 +10,7 @@ import dev.kord.core.entity.channel.*
 import dev.kord.rest.builder.message.*
 import java.net.*
 import javax.script.*
+import rhino.*
 
 object Vars{
     lateinit var client: Kord
@@ -79,7 +80,12 @@ object Vars{
 	    CombatCommand.addWeapon("{0} bombed {1}!", 25..45)
 	    
 	    val tt = Thread{
-	        jsScriptEngine = RhinoEngine()
+	        jsScriptEngine = RhinoEngine().apply{
+	            context = Context.enter()
+	            scope = ImporterTopLevel(context)
+	        }
+	        
+	        jsScriptEngine.context.initStandardObjects()
 	        
 	        jsScriptEngine.eval(resourceAsString("/scripts/global.js")!!)
 	    }
