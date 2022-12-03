@@ -44,7 +44,7 @@ object Vars{
     
     val scriptContext = SimpleScriptContext()
     
-    val jsScriptEngine = RhinoEngine()
+    lateinit var jsScriptEngine: RhinoEngine
     
 	val defaultImports by lazy{
 		ClassLoader::class.java.getDeclaredField("classes")
@@ -77,6 +77,8 @@ object Vars{
 	    CombatCommand.addWeapon("{0} burned {1} with a torch!", 9..18)
 	    CombatCommand.addWeapon("{0} swung a bat onto {1}'s head!", 15..25)
 	    CombatCommand.addWeapon("{0} bombed {1}!", 25..45)
+	    
+	    scriptEngine.eval(resourceAsString("/scripts/engineinit.kts"), scriptContext)
 	    
 	    jsScriptEngine.eval(resourceAsString("/scripts/global.js")!!)
 	}
