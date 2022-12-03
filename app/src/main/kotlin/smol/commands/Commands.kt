@@ -332,12 +332,22 @@ object Commands{
                     
                     Vars.battle.occupied = true
                     
-                    Vars.battle.begin(first, second, if(health > 450) 450 else health).forEach{
+                    val br = Vars.battle.begin(first, second, if(health > 450) 450 else health)
+                    
+                    br.forEach{
                         delay(1000 * 2L)
-                        ms.edit{
-                            val upcoming = "${ms.fetchMessage().content}\n$it\n---".enforce()
+                        try{
+                            ms.edit{
+                                val upcoming = "${ms.fetchMessage().content}\n$it\n---".enforce()
                             
-                            content = if(upcoming.length > 425) upcoming.substring(upcoming.length - 425) else upcoming
+                                content = if(upcoming.length > 425) upcoming.substring(upcoming.length - 425) else upcoming
+                            }
+                        }catch(e: Exception){
+                            ms.channel.createMessage("ERROR: Battle session in this channel is failing to progress normally! (possible root issue: ratelimiting)\nConclusion of battle:\n`${br.last()}\nError:\n`${e.toString()}`")
+                            
+                            delay(1000 * 3L)
+                            
+                            throw Exception("BATTLE SESSION PROGRESSION FAILURE", e)
                         }
                     }
                     
