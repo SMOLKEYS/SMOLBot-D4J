@@ -2,6 +2,7 @@
 importPackage(Packages.arc)
 importPackage(Packages.arc.audio)
 importPackage(Packages.arc.func)
+importPackage(Packages.arc.files)
 importPackage(Packages.arc.flabel)
 importPackage(Packages.arc.graphics)
 importPackage(Packages.arc.graphics.g2d)
@@ -39,6 +40,15 @@ importPackage(Packages.rhino)
 //kotlin, coroutines
 importPackage(Packages.kotlin.coroutines)
 
+//fast access to root packages
+const dev = Packages.dev
+const arc = Packages.arc
+const smol = Packages.smol
+const rhino = Packages.rhino
+const kotlin = Packages.kotlin
+const kotlinx = Packages.kotlinx
+
+
 function extend( /*Base, ..., def*/ ) {
     const Base = arguments[0]
     const def = arguments[arguments.length - 1]
@@ -54,6 +64,10 @@ function extend( /*Base, ..., def*/ ) {
         }
     }
     return instance
+}
+
+function newScope(){
+    Vars.INSTANCE.jsScriptEngine.reset()
 }
 
 //accessors for singletons

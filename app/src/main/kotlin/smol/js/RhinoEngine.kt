@@ -1,5 +1,6 @@
 package smol.js
 
+import smol.*
 import rhino.*
 import rhino.module.*
 import rhino.module.provider.*
@@ -40,6 +41,21 @@ open class RhinoEngine(){
     
     fun addGlobalProperty(name: String, obj: Any?){
         scope.put(name, scope, obj)
+    }
+    
+    fun removeGlobalProperty(name: String){
+        scope.put(name, scope, Undefined.instance)
+    }
+    
+    fun loadJsGlobal(){
+        eval(Vars.resourceAsString("/scripts/global.js")!!)
+    }
+    
+    fun reset(){
+        context = getScriptContext()
+        scope = ImporterTopLevel(context)
+        
+        loadJsGlobal()
     }
     
     fun getScriptContext(): Context{

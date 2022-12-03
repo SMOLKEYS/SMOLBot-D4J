@@ -81,6 +81,6 @@ object Vars{
         
         jsScriptEngine = RhinoEngine()
         
-        jsScriptEngine.eval(resourceAsString("/scripts/global.js")!!)
+        jsScriptEngine.loadJsGlobal()
     }
 }
