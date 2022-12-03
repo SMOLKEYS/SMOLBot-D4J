@@ -135,7 +135,15 @@ object Commands{
             Vars.jsScriptEngine.addGlobalProperty("message", it.first)
             Vars.jsScriptEngine.addGlobalProperty("args", it.second)
             
-            val res = Vars.jsScriptEngine.eval(script)
+            val res = try{
+                if(it.first.author!!.id != Vars.superuser) throw Throwable("You cannot run this command.")
+            
+                Vars.jsScriptEngine.eval(script)
+            }catch(e: Throwable){
+                (e.cause ?: e).let{
+                    it.toString()
+                }
+            }
             
             it.first.reply("$res".blockWrap())
         }
