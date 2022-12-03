@@ -13,14 +13,14 @@ open class RhinoEngine(){
     var scope: Scriptable
     
     init{
-        context = getCurrentContext()
+        context = getScriptContext()
         scope = ImporterTopLevel(context)
     }
     
     fun eval(scr: String): String?{
         var res: String? = null
         
-        context = getCurrentContext()
+        context = getScriptContext()
         
         context.initStandardObjects()
         
