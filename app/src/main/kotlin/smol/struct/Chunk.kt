@@ -32,12 +32,6 @@ open class Chunk<T>(val size: Int){
         return this
     }
     
-    fun addChunk(vararg elements: T): Chunk<T>{
-        if(elements.size > size) throw IllegalArgumentException("elements.size > size ($size)")
-        
-        holder.add(mutableList)
-    }
-    
     /** Removes the specified chunk index, or the last created chunk if -1 is given as an argument. */
     fun remove(target: Int = -1): Chunk<T>{
         val removeTarget = holder[if(target != -1) target else (holder.size - 1)]
@@ -120,7 +114,7 @@ open class Chunk<T>(val size: Int){
     fun randomChunkCopy(): MutableList<T>{
         val copy = mutableListOf<T>()
         
-        randomChunk.forEach{
+        holder.random().forEach{
             copy.add(it)
         }
         
