@@ -32,6 +32,12 @@ open class Chunk<T>(val size: Int){
         return this
     }
     
+    fun addChunk(vararg elements: T): Chunk<T>{
+        if(elements.size > size) throw IllegalArgumentException("elements.size > size ($size)")
+        
+        holder.add(mutableList)
+    }
+    
     /** Removes the specified chunk index, or the last created chunk if -1 is given as an argument. */
     fun remove(target: Int = -1): Chunk<T>{
         val removeTarget = holder[if(target != -1) target else (holder.size - 1)]
@@ -46,6 +52,14 @@ open class Chunk<T>(val size: Int){
         }
         
         return this
+    }
+    
+    fun clone(): Chunk<T>{
+        val new = Chunk<T>(size)
+        
+        this.forEachElement{ new.add(it) }
+        
+        return new
     }
     
     /** Returns a copy of the holder of this chunk instance. Safely modifiable. */
@@ -103,7 +117,17 @@ open class Chunk<T>(val size: Int){
         return holder.random()
     }
     
-    fun randomElementFromChunk(target: Int): T{
+    fun randomChunkCopy(): MutableList<T>{
+        val copy = mutableListOf<T>()
+        
+        randomChunk.forEach{
+            copy.add(it)
+        }
+        
+        return copy
+    }
+    
+    fun randomElementOfChunk(target: Int): T{
         return holder[target].random()
     }
     
@@ -121,6 +145,27 @@ open class Chunk<T>(val size: Int){
         
         return this
     }
+    
+    fun shuffleChunks(): Chunk<T>{
+        holder.shuffle()
+        return this
+    }
+    
+    fun shuffleElementsOfChunk(target: Int): Chunk<T>{
+        holder[target].shuffle()
+        return this
+    }
+    
+    fun shuffle(): Chunk<T>{
+        holder.shuffle()
+        holder.forEach{
+            it.shuffle()
+        }
+        
+        return this
+    }
+    
+    fun shuffled(): Chunk<T>{ return this.clone().shuffle() }
     
     operator fun get(index: Int): MutableList<T>{
         return holder[index]

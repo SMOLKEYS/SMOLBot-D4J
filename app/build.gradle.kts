@@ -25,6 +25,9 @@ dependencies{
     
     //i ponder for a moment
     implementation("com.github.Anuken.Arc:arc-core:v140.3")
+    
+    //oh no
+    implementation("com.google.code.gson:gson:2.10")
 }
 
 
