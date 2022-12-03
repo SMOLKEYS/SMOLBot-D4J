@@ -28,6 +28,9 @@ dependencies{
     
     //oh no
     implementation("com.google.code.gson:gson:2.10")
+    
+    //wheeee
+    implementation("com.github.mozilla:rhino:0131b5c7e4")
 }
 
 
