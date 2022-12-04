@@ -29,7 +29,7 @@ data class Player(var name: String, var health: Int){
     }
     
     fun attack(target: Player, weapon: Weapon): String{
-        finalDamage = weapon.damage.random()
+        val finalDamage = weapon.damage.random()
         
         target.damage(finalDamage)
         target.hits++
@@ -68,7 +68,7 @@ data class Player(var name: String, var health: Int){
 
 data class Weapon(var name: String, var damage: IntRange, val announcementMessages: MutableList<String>){
     
-    constructor(name: String, damage: IntRange, announcement: String) : super(name, damage, mutableListOf(announcement))
+    constructor(name: String, damage: IntRange, announcement: String) : this(name, damage, mutableListOf(announcement))
     
     fun announce(): String{ return announcementMessages.random() }
     
@@ -93,7 +93,7 @@ open class CombatCommand{
         (if(Random.nextBoolean()) u0 else u1).myTurn = true
         
         while(!Player.deadCheck(u0, u1)){
-            texts.add(Player.turn(u0, u1).attack(Player.turnOther(u0, u1)))
+            texts.add(Player.turn(u0, u1).attack(Player.turnOther(u0, u1), weapons.random()))
         }
         
         texts.add("${if(u0.winner) u0 else u1} wins!")
