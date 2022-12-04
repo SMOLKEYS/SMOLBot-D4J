@@ -72,12 +72,12 @@ object Vars{
     }
     
     fun load(){
-        CombatCommand.addWeapon("{0} punched {1}!", 1..7)
-        CombatCommand.addWeapon("{0} kicked {1}!", 3..10)
-        CombatCommand.addWeapon("{0} slashed a knife onto {1}!", 7..15)
-        CombatCommand.addWeapon("{0} burned {1} with a torch!", 9..18)
-        CombatCommand.addWeapon("{0} swung a bat onto {1}'s head!", 15..25)
-        CombatCommand.addWeapon("{0} bombed {1}!", 25..45)
+        CombatCommand.addWeapon(Weapon("Fist", 1..3, "p1 punched p2!"))
+        CombatCommand.addWeapon(Weapon("Kick", 3..5, "p1 kicked p2!"))
+        CombatCommand.addWeapon(Weapon("Knife", 7..13, mutableListOf(
+            "p1 stabbed p2!",
+            "p1 slashed p2!"
+        )))
         
         jsScriptEngine = RhinoEngine()
         
