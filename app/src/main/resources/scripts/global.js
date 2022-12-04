@@ -70,11 +70,6 @@ function newScope(){
     Vars.INSTANCE.jsScriptEngine.reset()
 }
 
-//shortcut constants
-const engine = Vars.INSTANCE.jsScriptEngine
-const kengine = Vars.INSTANCE.scriptEngine
-const client = Vars.INSTANCE.client
-
 //accessors for singletons
 const Vars = Packages.smol.Vars.INSTANCE
 const Printings = Packages.smol.console.Printings.INSTANCE

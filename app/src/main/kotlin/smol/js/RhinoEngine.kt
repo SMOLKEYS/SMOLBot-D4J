@@ -47,14 +47,6 @@ open class RhinoEngine(){
         scope.put(name, scope, Undefined.instance)
     }
     
-    fun addGlobalProperty(property: Pair<String, Any?>){
-        scope.put(property.first, scope, property.second)
-    }
-    
-    fun addGlobalProperties(vararg properties: Pair<String, Any?>){
-        properties.forEach{ addGlobalProperty(it) }
-    }
-    
     fun loadJsGlobal(){
         eval(Vars.resourceAsString("/scripts/global.js")!!)
     }
