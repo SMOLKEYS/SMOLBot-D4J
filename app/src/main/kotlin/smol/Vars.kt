@@ -72,11 +72,25 @@ object Vars{
     }
     
     fun load(){
+        //generic
         CombatCommand.addWeapon(Weapon("Fist", 1..3, "p1 punched p2!"))
         CombatCommand.addWeapon(Weapon("Kick", 3..5, "p1 kicked p2!"))
-        CombatCommand.addWeapon(Weapon("Knife", 7..13, mutableListOf(
+        
+        //less generic
+        CombatCommand.addWeapon(Weapon("Sharp", 7..13, mutableListOf(
             "p1 stabbed p2!",
             "p1 slashed p2!"
+        )))
+        CombatCommand.addWeapon(Weapon("Fire", 15..24, mutableListOf(
+            "p1 burned p2 with a torch!",
+            "p1 torched p2!",
+            "p1 burned p2!",
+            "p1 firestormed p2!"
+        )))
+        CombatCommand.addWeapon(Weapon("Blunt", 16..26, mutableListOf(
+            "p1 bashed p2 with a wood bat!",
+            "p1 bashed p2 with a metal bat!",
+            "p1 threw a chair at p2!"
         )))
         
         jsScriptEngine = RhinoEngine()

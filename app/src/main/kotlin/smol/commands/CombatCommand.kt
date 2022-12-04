@@ -93,7 +93,7 @@ open class CombatCommand{
         (if(Random.nextBoolean()) u0 else u1).myTurn = true
         
         while(!Player.deadCheck(u0, u1)){
-            texts.add(Player.turn(u0, u1).attack(Player.turnOther(u0, u1), weapons.random()))
+            texts.add(Player.turn(u0, u1).attack(Player.turnOther(u0, u1), weapons.random()) + "\n$u0: ${u0.health}\n$u1: ${u1.health}")
         }
         
         texts.add("${if(u0.winner) u0 else u1} wins!")
