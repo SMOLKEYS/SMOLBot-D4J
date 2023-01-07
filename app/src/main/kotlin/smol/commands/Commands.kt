@@ -130,7 +130,7 @@ object Commands{
         }
         
         command("evalsb", "<script>", "Evaluates `kts` code with no default imports. Extremely dangerous. Superuser only."){
-            val script = it.first.content.substring(8)
+            val script = it.first.content.substring(10)
             
             Vars.scriptEngine.put("message", it.first)
             Vars.scriptContext.setAttribute("message", it.first, ScriptContext.ENGINE_SCOPE)
