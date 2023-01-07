@@ -129,6 +129,35 @@ object Commands{
             it.first.reply("$res".blockWrap())
         }
         
+        command("evalsb", "<script>", "Evaluates `kts` code with no default imports. Extremely dangerous. Superuser only."){
+            val script = it.first.content.substring(8)
+            
+            Vars.scriptEngine.put("message", it.first)
+            Vars.scriptContext.setAttribute("message", it.first, ScriptContext.ENGINE_SCOPE)
+            
+            Vars.scriptEngine.put("args", it.second)
+            Vars.scriptContext.setAttribute("args", it.second, ScriptContext.ENGINE_SCOPE)
+            
+            val res = try{
+                if(it.first.author!!.id != Vars.superuser) throw Throwable("You cannot run this command.")
+                
+                Vars.scriptEngine.eval("$script", Vars.scriptContext).let{
+                    when(it){
+                        is Deferred<*> -> it.await()
+                        is Job -> it.join()
+                        else -> it
+                    }
+                }
+                
+            }catch(e: Throwable){
+                (e.cause ?: e).let{
+                    it.toString()
+                }
+            }
+            
+            it.first.reply("$res".blockWrap())
+        }
+        
         command("jval", "<script>", "Evaluates `js` code. Extremely dangerous. Superuser only."){
             val script = it.first.content.substring(8)
             
